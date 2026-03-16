@@ -154,17 +154,17 @@
     }
 
     /* ── Dimension card ── */
-    .dimension {
+    .capability {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
     }
-    .dimension-header {
+    .capability-header {
       padding: 24px 28px 20px;
       border-bottom: 1px solid var(--border);
     }
-    .dimension-number {
+    .capability-number {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: .08em;
@@ -172,7 +172,7 @@
       color: var(--text-secondary);
       margin-bottom: 4px;
     }
-    .dimension-header h2 {
+    .capability-header h2 {
       font-size: 20px;
       font-weight: 700;
       letter-spacing: -.01em;
@@ -201,6 +201,25 @@
       border: 1px solid rgba(104,72,184,.2);
       border-radius: 4px;
       padding: 2px 7px;
+    }
+
+    .capability-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      max-width: 640px;
+    }
+    .skill-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .skill-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-left: 9px;
     }
 
     /* ── Level rows ── */
@@ -309,7 +328,7 @@
 <body>
 
 <nav class="phase-nav">
-  <a class="phase-nav-brand" href="#">Founderito OS</a>
+  <a class="phase-nav-brand" href="founderito_os_dimensions.html">Founderito OS</a>
   <div class="phase-nav-links">
     <a class="phase-nav-link" href="founderito-understand.html">01 · Understand</a>
     <a class="phase-nav-link active" href="founderito-envision.html">02 · Envision</a>
@@ -320,7 +339,7 @@
 <header>
   <div class="phase-label">Founderito OS &mdash; Phase 2 of 3</div>
   <h1>Envision</h1>
-  <p>Five dimensions that define how well a founder can synthesise what they know into a clear direction — the opportunity, the vision, the model, the plan, and how humans and agents share the work.</p>
+  <p>Five capabilities that define how well a founder can synthesise what they know into a clear direction — the opportunity, the vision, the model, the plan, and how humans and agents share the work.</p>
 </header>
 
 <div class="legend">
@@ -336,15 +355,25 @@
 
 <main>
 
-  <!-- 1. Opportunity -->
-  <div class="dimension" id="opportunity">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 01</div>
-      <h2>Opportunity</h2>
+  <!-- 1. Opportunity Identification -->
+  <div class="capability" id="opportunity">
+    <div class="capability-header">
+      <div class="capability-number">Capability 01</div>
+      <h2>Opportunity Identification</h2>
+      <p class="capability-desc">Synthesising what you have learned into a clear conviction about where the real opportunity sits — the gap, the problem worth solving, and why now.</p>
       <div class="skills">
-        <span class="skill-tag">Insight synthesis</span>
-        <span class="skill-tag">Opportunity framing</span>
-        <span class="skill-tag">Problem definition</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Insight synthesis</span>
+          <span class="skill-desc">Combining customer, market, and domain signals into a single, defensible point of view.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Opportunity framing</span>
+          <span class="skill-desc">Articulating the gap clearly enough that others immediately understand the bet.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Problem definition</span>
+          <span class="skill-desc">Narrowing from a broad space to the specific problem worth solving first.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -388,14 +417,24 @@
   </div>
 
   <!-- 2. North Star Experience -->
-  <div class="dimension" id="north-star-experience">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 02</div>
+  <div class="capability" id="north-star-experience">
+    <div class="capability-header">
+      <div class="capability-number">Capability 02</div>
       <h2>North Star Experience</h2>
+      <p class="capability-desc">Defining and communicating the future state compellingly — the product experience, the design ambition, and the innovative leap that makes it worth building.</p>
       <div class="skills">
-        <span class="skill-tag">Vision crafting</span>
-        <span class="skill-tag">Experience design</span>
-        <span class="skill-tag">Narrative design</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Vision crafting</span>
+          <span class="skill-desc">Translating conviction into a vivid, specific picture of what the product experience should feel like.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Experience design</span>
+          <span class="skill-desc">Designing the key moments and interactions that define what 'good' looks like for the customer.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Narrative design</span>
+          <span class="skill-desc">Communicating the vision in a form that aligns a team without requiring constant interpretation.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -439,14 +478,24 @@
   </div>
 
   <!-- 3. Business Model -->
-  <div class="dimension" id="business-model">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 03</div>
+  <div class="capability" id="business-model">
+    <div class="capability-header">
+      <div class="capability-number">Capability 03</div>
       <h2>Business Model</h2>
+      <p class="capability-desc">The commercial logic that makes the opportunity viable — how value is created, delivered, and captured in a way that sustains and scales.</p>
       <div class="skills">
-        <span class="skill-tag">Business model design</span>
-        <span class="skill-tag">Value proposition</span>
-        <span class="skill-tag">Revenue modelling</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Business model design</span>
+          <span class="skill-desc">Structuring how value flows from creation through delivery to capture.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Value proposition</span>
+          <span class="skill-desc">Making explicit what the customer gets that they can't get elsewhere, and why they'd pay for it.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Revenue modelling</span>
+          <span class="skill-desc">Building and stress-testing the financial logic that underpins the commercial model.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -490,14 +539,24 @@
   </div>
 
   <!-- 4. Delivery Plan -->
-  <div class="dimension" id="delivery-plan">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 04</div>
+  <div class="capability" id="delivery-plan">
+    <div class="capability-header">
+      <div class="capability-number">Capability 04</div>
       <h2>Delivery Plan</h2>
+      <p class="capability-desc">The sequencing, prioritisation and resourcing of how you get from here to the north star — ruthless about what comes first and why.</p>
       <div class="skills">
-        <span class="skill-tag">Prioritisation</span>
-        <span class="skill-tag">Roadmapping</span>
-        <span class="skill-tag">Resource planning</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Prioritisation</span>
+          <span class="skill-desc">Choosing what to build first based on strategic logic, not urgency or volume of requests.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Roadmapping</span>
+          <span class="skill-desc">Sequencing work into a plan that connects near-term execution to the longer-term vision.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Resource planning</span>
+          <span class="skill-desc">Matching ambition to realistic capacity across people, agents, and time.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -541,14 +600,24 @@
   </div>
 
   <!-- 5. Operating Model -->
-  <div class="dimension" id="operating-model">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 05</div>
+  <div class="capability" id="operating-model">
+    <div class="capability-header">
+      <div class="capability-number">Capability 05</div>
       <h2>Operating Model <span class="agent-tag">agent-native</span></h2>
+      <p class="capability-desc">Strategic decisions about how humans and agents divide the work of envisioning and building — what requires human judgment and what can be delegated.</p>
       <div class="skills">
-        <span class="skill-tag">AI workflow design</span>
-        <span class="skill-tag">Delegation design</span>
-        <span class="skill-tag">Human-AI teaming</span>
+        <div class="skill-detail">
+          <span class="skill-tag">AI workflow design</span>
+          <span class="skill-desc">Designing repeatable processes where agents contribute reliably as part of the delivery system.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Delegation design</span>
+          <span class="skill-desc">Deciding explicitly which tasks require human judgment and which can be handed to agents.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Human-AI teaming</span>
+          <span class="skill-desc">Structuring collaboration between people and agents so each contributes what they do best.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -595,7 +664,7 @@
 </main>
 
 <footer>
-  Founderito OS &mdash; Envision Phase &middot; 5 dimensions &middot; L1–L5
+  Founderito OS &mdash; Envision Phase &middot; 5 capabilities &middot; L1–L5
 </footer>
 
 </body>

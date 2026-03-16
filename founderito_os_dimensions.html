@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Founderito · Operating System Dimensions</title>
+<title>Founderito · Operating System Capabilities</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -125,88 +125,44 @@ body {
   max-width: 640px;
 }
 .intro-body strong { color: var(--mid); font-weight: 500; }
-
-.agent-note {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 24px;
-  padding: 11px 16px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-left: 3px solid #0088A8;
-  font-size: 13px;
-  font-weight: 300;
-  color: var(--mid);
-  line-height: 1.55;
-}
-.agent-note strong { color: var(--white); font-weight: 600; }
-.agent-marker {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px; height: 18px;
-  background: #0088A8;
-  color: #FFFFFF;
-  font-size: 10px;
+.intro-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
   font-weight: 700;
-  font-family: 'JetBrains Mono', monospace;
-  flex-shrink: 0;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin: 28px 0 4px;
 }
-
-/* ── OS ARC ── */
-.os-arc {
-  max-width: var(--page-max);
-  margin: 0 auto 56px;
-  padding: 0 var(--page-pad);
-  display: flex;
-  align-items: stretch;
-  gap: 0;
+.intro-sub:first-of-type { margin-top: 32px; }
+.intro-steps {
+  list-style: none;
+  counter-reset: steps;
+  max-width: 640px;
 }
-.arc-step {
-  flex: 1;
-  min-height: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 14px 22px;
+.intro-steps li {
+  counter-increment: steps;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.7;
+  padding: 6px 0 6px 32px;
   position: relative;
 }
-.arc-step:nth-child(1) { background: var(--c-understand); }
-.arc-step:nth-child(2) { background: var(--c-envision); padding-left: 32px; }
-.arc-step:nth-child(3) { background: var(--c-deliver); flex: 1.4; padding-left: 32px; }
-.arc-step::after {
-  content: '';
+.intro-steps li::before {
+  content: counter(steps);
   position: absolute;
-  right: -15px; top: 0;
-  width: 0; height: 0;
-  border-top: var(--chevron-half, 40px) solid transparent;
-  border-bottom: var(--chevron-half, 40px) solid transparent;
-  z-index: 2;
-}
-.arc-step:nth-child(1)::after { border-left: 15px solid var(--c-understand); }
-.arc-step:nth-child(2)::after { border-left: 15px solid var(--c-envision); }
-.arc-step:nth-child(3)::after { display: none; }
-.arc-step-label {
+  left: 0;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: #FFFFFF;
-  line-height: 1;
-  margin-bottom: 7px;
+  color: var(--muted);
+  width: 22px;
+  text-align: center;
+  top: 8px;
 }
-.arc-step-desc {
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 300;
-  color: rgba(255,255,255,.75);
-  line-height: 1.55;
-  max-width: 260px;
-}
-.arc-step:nth-child(3) .arc-step-desc { max-width: 320px; }
+.intro-steps li strong { color: var(--mid); font-weight: 600; }
+
 
 /* ── PHASE SECTION ── */
 .phase-section {
@@ -219,13 +175,40 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 28px 17px;
+  padding: 20px 28px 18px;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  cursor: pointer;
+  user-select: none;
+}
+.phase-section.collapsed .phase-header {
+  border-radius: var(--radius-lg);
 }
 .phase-header-left {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
+}
+.phase-header-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.phase-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  color: rgba(255,255,255,.5);
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.phase-section.collapsed .phase-toggle {
+  transform: rotate(-90deg);
+}
+.phase-section.collapsed .phase-body {
+  display: none;
 }
 .phase-number {
   font-family: 'JetBrains Mono', monospace;
@@ -249,10 +232,9 @@ body {
 .phase-shift {
   font-size: 13px;
   font-weight: 300;
-  color: rgba(255,255,255,.7);
+  color: rgba(255,255,255,.65);
   line-height: 1.5;
-  max-width: 340px;
-  text-align: right;
+  max-width: 520px;
 }
 .phase-shift strong {
   color: #FFFFFF;
@@ -266,14 +248,14 @@ body {
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   display: flex;
   align-items: stretch;
-  min-height: 460px;
+  min-height: 520px;
 }
 
 /* ── RADAR COLUMN ── */
 .phase-radar-col {
-  width: 460px;
+  width: 520px;
   flex-shrink: 0;
-  padding: 36px 0;
+  padding: 20px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -298,11 +280,19 @@ body {
   padding: 18px 28px;
   border-bottom: 1px solid rgba(0,0,0,.05);
   position: relative;
-  transition: background .12s;
+  transition: background .15s, box-shadow .15s;
+  cursor: pointer;
+}
+.dim-row:hover {
+  background: rgba(0,136,168,.06);
+  box-shadow: inset 3px 0 0 var(--row-phase-color, var(--muted));
 }
 .dim-row:last-child { border-bottom: none; }
 .dim-row.agent-native {
   background: rgba(0,136,168,.04);
+}
+.dim-row.agent-native:hover {
+  background: rgba(0,136,168,.10);
 }
 .dim-row.agent-native::before {
   content: '';
@@ -472,62 +462,7 @@ a.dim-level { cursor: pointer; }
   letter-spacing: .01em;
 }
 
-/* ── LEGEND ── */
-.legend {
-  max-width: var(--page-max);
-  margin: 8px auto 0;
-  padding: 0 var(--page-pad);
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--text);
-  font-family: 'JetBrains Mono', monospace;
-  letter-spacing: .06em;
-}
 
-/* ── INSIGHT BAR ── */
-.insight-bar {
-  max-width: var(--page-max);
-  margin: 32px auto 0;
-  padding: 0 var(--page-pad);
-}
-.insight-inner {
-  border: 1px solid var(--border-2);
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1px;
-  background: var(--border-2);
-}
-.insight-cell {
-  background: var(--panel);
-  padding: 20px 24px;
-  border-top: 3px solid transparent;
-}
-.insight-cell:nth-child(1) { border-top-color: var(--c-understand); }
-.insight-cell:nth-child(2) { border-top-color: var(--c-envision); }
-.insight-cell:nth-child(3) { border-top-color: var(--c-deliver); }
-.insight-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-.insight-text {
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--text);
-  line-height: 1.65;
-}
-.insight-text strong { color: var(--white); font-weight: 500; }
 </style>
 </head>
 <body>
@@ -537,80 +472,45 @@ a.dim-level { cursor: pointer; }
   <div class="page-header-left">
     <span class="header-logo">Founderito</span>
     <div class="header-divider"></div>
-    <span class="header-title">Operating System · Dimensional Framework</span>
+    <span class="header-title">Operating System · Capability Framework</span>
   </div>
   <span class="header-badge">Agent-Native v1</span>
 </div>
 
 <!-- ── INTRO ── -->
 <div class="intro">
-  <div class="intro-step">Framework · 3 phases · 16 dimensions</div>
-  <h1 class="intro-heading">The <span class="accent">Product OS</span><br>Dimension Map</h1>
+  <div class="intro-step">Framework · 3 phases · 15 capabilities</div>
+  <h1 class="intro-heading">What shape is the<br><span class="accent">Product Builder</span>?</h1>
+
+  <h2 class="intro-sub">Why a new role?</h2>
   <p class="intro-body">
-    The operating system maps <strong>16 capability dimensions</strong> across 3 phases. As agents increasingly do or support delivery, the human layer concentrates around judgment, framing, and taste — not execution.
+    With AI agents, a single founder can now operate as designer, engineer, and product person simultaneously. But this expanded role demands a new set of skills — knowing when to direct, when to delegate, and when to override. This operating system maps <strong>15 capabilities</strong> across 3 phases — so you can see where you're strong, where the gaps are, and where to focus next.
   </p>
-  <div class="agent-note">
-    <span class="agent-marker">A</span>
-    Dimensions marked <strong>agent-native</strong> are new or significantly changed in the context of agent-powered delivery — these are the emerging edges of founder capability.
-  </div>
+
+  <h2 class="intro-sub">AI-supported skills</h2>
+  <p class="intro-body">
+    Most capabilities in this framework aren't new — customer insight, strategic thinking, business model design have always mattered. What's changed is that AI agents now amplify these skills. A founder with strong customer insight can use agents to synthesise research faster. A clear delivery plan lets agents execute with less hand-holding. The existing 11 capabilities are <strong>AI-supported</strong>: traditional skills made more powerful with agent assistance.
+  </p>
+
+  <h2 class="intro-sub">New agent-native skills</h2>
+  <p class="intro-body">
+    Four capabilities are genuinely new — skills that didn't exist before AI agents became part of the delivery workflow: <strong>Context Architecture</strong>, <strong>Operating Model</strong>, <strong>Orchestration Fluency</strong>, and <strong>Quality Stewardship</strong>. These define how well you structure work for agents, divide responsibility between humans and AI, and maintain the quality bar as output scales. They are the emerging edge of what it means to build with agents.
+  </p>
+
+  <h2 class="intro-sub">How to use this</h2>
+  <ol class="intro-steps">
+    <li><strong>Understand the phases</strong> — three stages of building: understanding your context, envisioning what to build, and delivering it.</li>
+    <li><strong>Understand the capability outcomes</strong> — each capability describes what good looks like at each level.</li>
+    <li><strong>Understand the skills</strong> — each capability breaks down into the specific skills needed to achieve that outcome.</li>
+    <li><strong>Assess yourself</strong> — rate yourself honestly against each skill to identify gaps and create a growth plan. Baselines are the level you should reach within 3 months.</li>
+  </ol>
 </div>
 
-<!-- ── OS ARC ── -->
-<div class="os-arc">
-  <div class="arc-step">
-    <div class="arc-step-label">01 · Understand</div>
-    <div class="arc-step-desc">Get genuinely close to the customer, the market, and the problem before building anything.</div>
-  </div>
-  <div class="arc-step">
-    <div class="arc-step-label">02 · Envision</div>
-    <div class="arc-step-desc">Define what to build, why it matters, and how agents and humans each play a role.</div>
-  </div>
-  <div class="arc-step">
-    <div class="arc-step-label">03 · Deliver, Run &amp; Learn</div>
-    <div class="arc-step-desc">Ship, operate, and close feedback loops — orchestrating agents and people to improve continuously.</div>
-  </div>
-</div>
 
 <!-- ── PHASES ── -->
 <div id="phases-container"></div>
 
-<!-- ── LEGEND ── -->
-<div class="legend">
-  <div class="legend-item">
-    <div style="width:20px;height:2px;background:#1880C0;"></div>
-    Understand
-  </div>
-  <div class="legend-item">
-    <div style="width:20px;height:2px;background:#6848B8;"></div>
-    Envision
-  </div>
-  <div class="legend-item">
-    <div style="width:20px;height:2px;background:#1A9060;"></div>
-    Deliver, Run &amp; Learn
-  </div>
-  <div class="legend-item" style="margin-left: auto;">
-    <div style="width:20px;height:2px;background:rgba(0,136,168,.25);border-top:1px dashed #0088A8;"></div>
-    Agent-native dimension
-  </div>
-</div>
 
-<!-- ── INSIGHT ── -->
-<div class="insight-bar">
-  <div class="insight-inner">
-    <div class="insight-cell">
-      <div class="insight-label">Key shift · Understand</div>
-      <div class="insight-text">The depth of your Understand work sets the ceiling for everything else. <strong>Agents amplify what they're given</strong> — so shallow understanding doesn't just slow you down, it compounds across every output.</div>
-    </div>
-    <div class="insight-cell">
-      <div class="insight-label">Key shift · Envision</div>
-      <div class="insight-text">Agents work directly from your direction. <strong>A clear, specific vision produces clear, specific output</strong> at speed. Fuzzy direction produces fuzzy results — faster.</div>
-    </div>
-    <div class="insight-cell">
-      <div class="insight-label">Key shift · Deliver</div>
-      <div class="insight-text">As agents handle more execution, the founder's role becomes directing rather than doing. <strong>The primary differentiator becomes human judgment</strong> — the final call on what's actually good enough to ship.</div>
-    </div>
-  </div>
-</div>
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────
@@ -623,11 +523,11 @@ const phases = [
     colorRgb: '24,128,192',
     shift: 'The depth of your understanding sets the ceiling for everything that follows. <strong>Agents amplify whatever context they\'re given</strong> — shallow inputs produce shallow outputs.',
     dims: [
-      { name: 'Customer Insight',     desc: 'Deep insight into personas, pain points, jobs-to-be-done, and the full customer journey — from raw discovery through to pattern recognition',                             level: 4, baseline: 3, target: null, link: 'customer-insight',    agent: false, skills: ['Customer discovery', 'Persona development', 'Demand unfolding'] },
-      { name: 'Strategic Landscape',  desc: 'Situational awareness across macro trends, company strategy, and product strategy — understanding where you play, why, and what constraints shape that',                  level: 3, baseline: 2, target: null, link: 'strategic-landscape', agent: false, skills: ['Strategic analysis', 'Competitive positioning', 'Macro analysis'] },
-      { name: 'Domain Dynamics',      desc: 'Understanding how competitors, feature sets, business models, positioning, and threat levels shift over time — actively maintained, not a one-time snapshot',             level: 3, baseline: 2, target: 3,    link: 'domain-dynamics',    agent: false, skills: ['Competitive intelligence', 'Market positioning', 'Business model analysis'] },
+      { name: 'Customer Insight',     desc: 'Deep insight into personas, pain points, jobs-to-be-done, and the full customer journey — from raw discovery through to pattern recognition',                             level: 4, baseline: 3, target: null, link: 'customer-insight',    agent: false, skills: ['Customer discovery', 'Persona development', 'Demand discovery'] },
+      { name: 'Strategic Landscape',  desc: 'Awareness of macro trends, company strategy, and competitive position — knowing where you play and why, e.g. how a regulatory shift or platform change reshapes your options',                  level: 3, baseline: 2, target: null, link: 'strategic-landscape', agent: false, skills: ['Strategic analysis', 'Competitive positioning', 'Macro analysis'] },
+      { name: 'Domain Dynamics',      desc: 'Tracking how competitors, features, and business models shift over time — e.g. noticing a competitor\'s hiring pattern signals a pivot before they announce it',             level: 3, baseline: 2, target: 3,    link: 'domain-dynamics',    agent: false, skills: ['Competitive intelligence', 'Market positioning', 'Business model analysis'] },
       { name: 'Emergent Trends',      desc: 'Tracking meaningful shifts in business, technology, and design before they become obvious — and knowing which ones actually matter to your context',                       level: 2, baseline: 2, target: 4,    link: 'emergent-trends',    agent: false, skills: ['Foresight', 'Technology scanning', 'Design literacy'] },
-      { name: 'Context Architecture', desc: 'Creating rich, structured context across all four Understand inputs so that agents can work reliably — not just prompting, but designing the information layer',           level: 2, baseline: 3, target: 4,    link: 'context-architecture', agent: true,  skills: ['Brief writing', 'Knowledge design', 'Context structuring'] },
+      { name: 'Context Architecture', desc: 'Structuring what you know — personas, constraints, domain knowledge — so agents produce reliable output without starting from scratch each time',           level: 2, baseline: 3, target: 4,    link: 'context-architecture', agent: true,  skills: ['Brief writing', 'Knowledge design', 'Context structuring'] },
     ]
   },
   {
@@ -638,11 +538,11 @@ const phases = [
     colorRgb: '104,72,184',
     shift: 'Clear decisions here unlock speed everywhere else. <strong>Agents execute on your conviction</strong> — not your uncertainty.',
     dims: [
-      { name: 'Opportunity',          desc: 'Synthesising what you have learned into a clear conviction about where the real opportunity sits — the gap, the problem worth solving, and why now',                          level: 3, agent: false, skills: ['Insight synthesis', 'Opportunity framing', 'Problem definition'] },
-      { name: 'North Star Experience',desc: 'Defining and communicating the future state compellingly — the product experience, the design ambition, and the innovative leap that makes it worth building',               level: 4, agent: false, skills: ['Vision crafting', 'Experience design', 'Narrative design'] },
-      { name: 'Business Model',       desc: 'The commercial logic that makes the opportunity viable — how value is created, delivered, and captured in a way that sustains and scales',                                    level: 3, agent: false, skills: ['Business model design', 'Value proposition', 'Revenue modelling'] },
-      { name: 'Delivery Plan',        desc: 'The sequencing, prioritisation and resourcing of how you get from here to the north star — ruthless about what comes first and why',                                         level: 3, agent: false, skills: ['Prioritisation', 'Roadmapping', 'Resource planning'] },
-      { name: 'Operating Model',      desc: 'Strategic decisions about how humans and agents divide the work of envisioning and building — what requires human judgment and what can be delegated',                        level: 2, agent: true,  skills: ['AI workflow design', 'Delegation design', 'Human-AI teaming'] },
+      { name: 'Opportunity Identification',          desc: 'Synthesising what you have learned into a clear conviction about where the real opportunity sits — the gap, the problem worth solving, and why now',                          level: 3, baseline: 3, target: null, link: 'opportunity',            agent: false, skills: ['Insight synthesis', 'Opportunity framing', 'Problem definition'] },
+      { name: 'North Star Experience',desc: 'Defining and communicating the future state compellingly — the product experience, the design ambition, and the innovative leap that makes it worth building',               level: 4, baseline: 3, target: null, link: 'north-star-experience', agent: false, skills: ['Vision crafting', 'Experience design', 'Narrative design'] },
+      { name: 'Business Model',       desc: 'The commercial logic that makes the opportunity viable — how value is created, delivered, and captured in a way that sustains and scales',                                    level: 3, baseline: 3, target: null, link: 'business-model',        agent: false, skills: ['Business model design', 'Value proposition', 'Revenue modelling'] },
+      { name: 'Delivery Plan',        desc: 'The sequencing, prioritisation and resourcing of how you get from here to the north star — ruthless about what comes first and why',                                         level: 3, baseline: 3, target: null, link: 'delivery-plan',         agent: false, skills: ['Prioritisation', 'Roadmapping', 'Resource planning'] },
+      { name: 'Operating Model',      desc: 'Strategic decisions about how humans and agents divide the work of envisioning and building — what requires human judgment and what can be delegated',                        level: 2, baseline: 2, target: 3,    link: 'operating-model',       agent: true,  skills: ['AI workflow design', 'Delegation design', 'Human-AI teaming'] },
     ]
   },
   {
@@ -653,12 +553,11 @@ const phases = [
     colorRgb: '26,144,96',
     shift: 'The founder\'s role shifts from doing the work to directing it — <strong>setting the quality bar</strong> and making sure what ships is actually good.',
     dims: [
-      { name: 'Orchestration Fluency', desc: 'Designing, directing and improving agent + human workflows',                                           level: 2, agent: true,  skills: ['Workflow design', 'AI tooling', 'Process orchestration'] },
-      { name: 'Operational Clarity',   desc: 'Metrics, process and systems that give the team — and agents — visibility',                           level: 3, agent: false, skills: ['Metrics design', 'Process documentation', 'OKR execution'] },
-      { name: 'Team Activation',       desc: 'Hiring, developing and energising people in a hybrid human-agent team',                               level: 4, agent: false, skills: ['Hiring', 'Performance management', 'Culture building'] },
-      { name: 'Learning Velocity',     desc: 'Closing feedback loops fast; synthesising what agents and experiments reveal',                         level: 3, agent: false, skills: ['Experiment design', 'Feedback loop design', 'Data synthesis'] },
-      { name: 'Quality Stewardship',   desc: 'The human taste gate — final judgment on what actually ships',                                        level: 3, agent: true,  skills: ['Quality review', 'Taste calibration', 'Standards setting'] },
-      { name: 'Founder State',         desc: 'Energy management, equanimity and clarity under sustained pressure',                                  level: 4, agent: false, skills: ['Energy management', 'Resilience building', 'Focus practice'] },
+      { name: 'Orchestration Fluency', desc: 'Designing repeatable agent + human workflows — e.g. a content pipeline where agents draft, humans review, and quality stays consistent',                                           level: 2, baseline: 2, target: 3,    link: 'orchestration-fluency', agent: true,  skills: ['Workflow design', 'AI tooling', 'Process orchestration'] },
+      { name: 'Operational Clarity',   desc: 'Metrics, processes and documentation that give the team and agents shared visibility — e.g. dashboards that drive decisions, not just display numbers',                           level: 3, baseline: 3, target: null, link: 'operational-clarity',   agent: false, skills: ['Metrics design', 'Process documentation', 'OKR execution'] },
+      { name: 'Learning Velocity',     desc: 'Closing feedback loops fast — running structured experiments, reading agent output quality as signal, and feeding learnings back into the next iteration',                         level: 3, baseline: 3, target: null, link: 'learning-velocity',     agent: false, skills: ['Experiment design', 'Feedback loop design', 'Data synthesis'] },
+      { name: 'Quality Stewardship',   desc: 'The human taste gate — setting an explicit quality bar and applying it consistently, especially when agents generate significant output',                                        level: 3, baseline: 2, target: 3,    link: 'quality-stewardship',   agent: true,  skills: ['Quality review', 'Taste calibration', 'Standards setting'] },
+      { name: 'Founder State',         desc: 'Energy management, composure and clarity under sustained pressure',                                  level: 4, baseline: 2, target: 3,    link: 'founder-state',         agent: false, skills: ['Energy management', 'Resilience building', 'Focus practice'] },
     ]
   }
 ];
@@ -667,12 +566,19 @@ const phases = [
 const abbrevs = [
   ['Customer Insight','Strategic Landscape','Domain Dynamics','Emergent Trends','Context Architecture'],
   ['Opportunity','North Star Experience','Business Model','Delivery Plan','Operating Model'],
-  ['Orchestration Fluency','Operational Clarity','Team Activation','Learning Velocity','Quality Stewardship','Founder State']
+  ['Orchestration Fluency','Operational Clarity','Learning Velocity','Quality Stewardship','Founder State']
 ];
 
 // ── LEVEL RUBRIC ───────────────────────────────────────────────────────────
 const levelNames = ['', 'Absent', 'Emerging', 'Developing', 'Strong', 'Exceptional'];
-const understandUrl = 'file:///Users/henry.cho/Documents/12.%20Claude%20Code/founderito-understand.html';
+const phaseUrls = {
+  understand: 'founderito-understand.html',
+  envision:   'founderito-envision.html',
+  deliver:    'founderito-deliver.html'
+};
+
+// ── RADAR STATE (for hover redraw) ────────────────────────────────────────
+const radarState = []; // { canvas, dims, color, colorRgb, labels }
 
 // ── BUILD DOM ──────────────────────────────────────────────────────────────
 const container = document.getElementById('phases-container');
@@ -683,17 +589,31 @@ phases.forEach((phase, phaseIdx) => {
   section.className = 'phase-section';
   section.id = phase.id;
 
-  // Header band
+  // Start collapsed for envision and deliver
+  if (phaseIdx > 0) section.className += ' collapsed';
+
+  // Header band (clickable to toggle)
   const header = document.createElement('div');
   header.className = 'phase-header';
   header.style.background = phase.color;
   header.innerHTML = `
     <div class="phase-header-left">
       <span class="phase-number">${phase.number}</span>
-      <span class="phase-name">${phase.name}</span>
+      <div class="phase-header-title-group">
+        <span class="phase-name">${phase.name}</span>
+        <div class="phase-shift">${phase.shift}</div>
+      </div>
     </div>
-    <div class="phase-shift">${phase.shift}</div>
+    <span class="phase-toggle">&#9660;</span>
   `;
+  header.addEventListener('click', () => {
+    section.classList.toggle('collapsed');
+    // Redraw radar when expanding (canvas may not have rendered while hidden)
+    if (!section.classList.contains('collapsed')) {
+      const rs = radarState[phaseIdx];
+      if (rs) requestAnimationFrame(() => drawRadar(rs.canvas, rs.dims, rs.color, rs.colorRgb, rs.labels, -1));
+    }
+  });
   section.appendChild(header);
 
   // Body: radar + dims
@@ -715,15 +635,33 @@ phases.forEach((phase, phaseIdx) => {
   const colHeaders = document.createElement('div');
   colHeaders.className = 'dims-col-headers';
   colHeaders.innerHTML = `
-    <span class="col-header-dim">Dimension</span>
+    <span class="col-header-dim">Capability</span>
     <span class="col-header-skills">Skills Needed</span>
   `;
   dimsCol.appendChild(colHeaders);
 
-  phase.dims.forEach(dim => {
+  phase.dims.forEach((dim, dimIdx) => {
     const row = document.createElement('div');
     row.className = 'dim-row' + (dim.agent ? ' agent-native' : '');
+    row.style.setProperty('--row-phase-color', phase.color);
     if (dim.agent) row.style.borderLeft = `3px solid ${phase.color}`;
+
+    // Hover → highlight on radar
+    row.addEventListener('mouseenter', () => {
+      const rs = radarState[phaseIdx];
+      if (rs) drawRadar(rs.canvas, rs.dims, rs.color, rs.colorRgb, rs.labels, dimIdx);
+    });
+    row.addEventListener('mouseleave', () => {
+      const rs = radarState[phaseIdx];
+      if (rs) drawRadar(rs.canvas, rs.dims, rs.color, rs.colorRgb, rs.labels, -1);
+    });
+
+    // Click → navigate to detail page
+    if (dim.link) {
+      row.addEventListener('click', () => {
+        window.open(`${phaseUrls[phase.id]}#${dim.link}`, '_blank');
+      });
+    }
 
     const pips = [1,2,3,4,5].map(n => {
       const filled = n <= (dim.baseline || dim.level);
@@ -740,7 +678,7 @@ phases.forEach((phase, phaseIdx) => {
       ? `<span class="tooltip-baseline">Baseline · L${dim.baseline} ${levelNames[dim.baseline]}</span>` : '';
 
     const levelTag  = dim.link ? 'a' : 'div';
-    const levelHref = dim.link ? ` href="${understandUrl}#${dim.link}" target="_blank"` : '';
+    const levelHref = dim.link ? ` href="${phaseUrls[phase.id]}#${dim.link}" target="_blank"` : '';
 
     row.innerHTML = `
       <div class="dim-dot" style="background:${dim.agent ? phase.color : 'rgba(0,136,168,.4)'}"></div>
@@ -753,9 +691,9 @@ phases.forEach((phase, phaseIdx) => {
       </div>
       <${levelTag} class="dim-level"${levelHref}>
         <div class="level-pips">${pips}</div>
-        <div class="level-label">L${dim.level} / 5</div>
+        <div class="level-label">L${dim.baseline || dim.level} / 5</div>
         <div class="level-tooltip">
-          <span class="tooltip-level">L${dim.level} · ${levelNames[dim.level]}</span>
+          <span class="tooltip-level">L${dim.baseline || dim.level} · ${levelNames[dim.baseline || dim.level]}</span>
           ${tooltipBaseline}
         </div>
       </${levelTag}>
@@ -767,31 +705,26 @@ phases.forEach((phase, phaseIdx) => {
   section.appendChild(body);
   container.appendChild(section);
 
+  // Store radar state for hover redraws
+  radarState[phaseIdx] = { canvas, dims: phase.dims, color: phase.color, colorRgb: phase.colorRgb, labels: abbrevs[phaseIdx] };
+
   // Draw radar
-  requestAnimationFrame(() => drawRadar(canvas, phase.dims, phase.color, phase.colorRgb, abbrevs[phaseIdx]));
+  requestAnimationFrame(() => drawRadar(canvas, phase.dims, phase.color, phase.colorRgb, abbrevs[phaseIdx], -1));
 });
 
-// ── CHEVRON SIZING ────────────────────────────────────────────────────────
-function fixChevrons() {
-  document.querySelectorAll('.arc-step').forEach((step, i) => {
-    if (i < 2) {
-      step.style.setProperty('--chevron-half', (step.offsetHeight / 2) + 'px');
-    }
-  });
-}
-window.addEventListener('load', fixChevrons);
-window.addEventListener('resize', fixChevrons);
 
 // ── RADAR RENDERER ────────────────────────────────────────────────────────
-function drawRadar(canvas, dims, color, colorRgb, labelArr) {
+function drawRadar(canvas, dims, color, colorRgb, labelArr, highlightIdx) {
   const dpr  = window.devicePixelRatio || 1;
-  const SIZE = 460;
+  const SIZE = 520;
   canvas.width  = SIZE * dpr;
   canvas.height = SIZE * dpr;
   canvas.style.width  = SIZE + 'px';
   canvas.style.height = SIZE + 'px';
 
   const ctx = canvas.getContext('2d');
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.scale(dpr, dpr);
 
   const cx = SIZE / 2, cy = SIZE / 2;
@@ -852,62 +785,144 @@ function drawRadar(canvas, dims, color, colorRgb, labelArr) {
     }
   });
 
+  const hasHighlight = highlightIdx >= 0 && highlightIdx < N;
+
+  // Highlight: axis line from center to highlighted point
+  if (hasHighlight) {
+    const hp = pt(maxR, highlightIdx);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(hp.x, hp.y);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2.5;
+    ctx.globalAlpha = 0.45;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
   // Data fill
   ctx.beginPath();
   dims.forEach((d, i) => {
-    const p = pt(maxR * (d.level / 5), i);
+    const val = d.baseline || d.level;
+    const p = pt(maxR * (val / 5), i);
     i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
   });
   ctx.closePath();
-  ctx.fillStyle   = `rgba(${colorRgb},.13)`;
-  ctx.strokeStyle = color;
+  ctx.fillStyle   = hasHighlight ? `rgba(${colorRgb},.08)` : `rgba(${colorRgb},.13)`;
+  ctx.strokeStyle  = hasHighlight ? `rgba(${colorRgb},.35)` : color;
   ctx.lineWidth   = 2;
   ctx.fill();
   ctx.stroke();
 
+  // Highlighted data fill wedge — brighter slice for the hovered dim
+  if (hasHighlight) {
+    const hi = highlightIdx;
+    const prev = (hi - 1 + N) % N;
+    const next = (hi + 1) % N;
+    const valH = dims[hi].baseline || dims[hi].level;
+    const valP = dims[prev].baseline || dims[prev].level;
+    const valN = dims[next].baseline || dims[next].level;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(pt(maxR * (valP / 5), prev).x, pt(maxR * (valP / 5), prev).y);
+    ctx.lineTo(pt(maxR * (valH / 5), hi).x, pt(maxR * (valH / 5), hi).y);
+    ctx.lineTo(pt(maxR * (valN / 5), next).x, pt(maxR * (valN / 5), next).y);
+    ctx.closePath();
+    ctx.fillStyle = `rgba(${colorRgb},.22)`;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(pt(maxR * (valP / 5), prev).x, pt(maxR * (valP / 5), prev).y);
+    ctx.lineTo(pt(maxR * (valH / 5), hi).x, pt(maxR * (valH / 5), hi).y);
+    ctx.lineTo(pt(maxR * (valN / 5), next).x, pt(maxR * (valN / 5), next).y);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  }
+
   // Data points
   dims.forEach((d, i) => {
-    const p = pt(maxR * (d.level / 5), i);
+    const val = d.baseline || d.level;
+    const p = pt(maxR * (val / 5), i);
+    const isHl = hasHighlight && i === highlightIdx;
+    const radius = isHl ? 9 : (d.agent ? 6 : 4);
     ctx.beginPath();
-    ctx.arc(p.x, p.y, d.agent ? 6 : 4, 0, Math.PI * 2);
-    if (d.agent) {
+    ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+    if (isHl) {
       ctx.fillStyle = '#FFFFFF';
       ctx.fill();
       ctx.strokeStyle = color;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      // inner filled circle
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+    } else if (d.agent) {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fill();
+      ctx.strokeStyle = hasHighlight ? `rgba(${colorRgb},.4)` : color;
       ctx.lineWidth = 2;
       ctx.stroke();
     } else {
-      ctx.fillStyle = color;
+      ctx.fillStyle = hasHighlight ? `rgba(${colorRgb},.4)` : color;
       ctx.fill();
     }
   });
 
-  // Axis labels
-  const labelR = maxR + 22;
+  // Axis labels — pushed outward with alignment away from center
+  const labelR = maxR + 32;
   dims.forEach((dim, i) => {
     const a  = angleFor(i);
-    const lx = cx + labelR * Math.cos(a);
-    const ly = cy + labelR * Math.sin(a);
+    const isHl = hasHighlight && i === highlightIdx;
+    const r = isHl ? labelR + 4 : labelR;
+    const lx = cx + r * Math.cos(a);
+    const ly = cy + r * Math.sin(a);
     const lbl = labelArr[i];
 
-    ctx.font = `${dim.agent ? '700' : '500'} 12px "Inter", sans-serif`;
-    ctx.fillStyle = dim.agent ? color : 'rgba(46,74,96,.85)';
-    ctx.textAlign = 'center';
-    ctx.textBaseline =
-      Math.abs(Math.sin(a)) < 0.12 ? 'middle' :
-      Math.sin(a) > 0 ? 'top' : 'bottom';
+    if (isHl) {
+      ctx.font = '700 13px "Inter", sans-serif';
+      ctx.fillStyle = color;
+    } else if (hasHighlight) {
+      ctx.font = `${dim.agent ? '700' : '500'} 11px "Inter", sans-serif`;
+      ctx.fillStyle = 'rgba(46,74,96,.35)';
+    } else {
+      ctx.font = `${dim.agent ? '700' : '500'} 11px "Inter", sans-serif`;
+      ctx.fillStyle = dim.agent ? color : 'rgba(46,74,96,.85)';
+    }
+
+    // Align text away from center based on angle
+    const cosA = Math.cos(a);
+    if (cosA > 0.3) ctx.textAlign = 'left';
+    else if (cosA < -0.3) ctx.textAlign = 'right';
+    else ctx.textAlign = 'center';
+
+    const sinA = Math.sin(a);
+    if (sinA > 0.3) ctx.textBaseline = 'top';
+    else if (sinA < -0.3) ctx.textBaseline = 'bottom';
+    else ctx.textBaseline = 'middle';
 
     if (lbl.includes(' ') && lbl.length > 10) {
-      // wrap long labels across two lines
       const words = lbl.split(' ');
       const mid = Math.ceil(words.length / 2);
       const line1 = words.slice(0, mid).join(' ');
       const line2 = words.slice(mid).join(' ');
       const lineH = 14;
-      const origBaseline = ctx.textBaseline;
-      ctx.textBaseline = 'middle';
-      ctx.fillText(line1, lx, ly - lineH / 2);
-      ctx.fillText(line2, lx, ly + lineH / 2);
+      const savedBaseline = ctx.textBaseline;
+      // For top-aligned labels, draw lines downward; for bottom, draw upward
+      if (savedBaseline === 'top') {
+        ctx.textBaseline = 'top';
+        ctx.fillText(line1, lx, ly);
+        ctx.fillText(line2, lx, ly + lineH);
+      } else if (savedBaseline === 'bottom') {
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(line1, lx, ly - lineH);
+        ctx.fillText(line2, lx, ly);
+      } else {
+        ctx.textBaseline = 'middle';
+        ctx.fillText(line1, lx, ly - lineH / 2);
+        ctx.fillText(line2, lx, ly + lineH / 2);
+      }
     } else {
       ctx.fillText(lbl, lx, ly);
     }

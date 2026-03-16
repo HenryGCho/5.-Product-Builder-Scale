@@ -154,17 +154,17 @@
     }
 
     /* ── Dimension card ── */
-    .dimension {
+    .capability {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
     }
-    .dimension-header {
+    .capability-header {
       padding: 24px 28px 20px;
       border-bottom: 1px solid var(--border);
     }
-    .dimension-number {
+    .capability-number {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: .08em;
@@ -172,7 +172,7 @@
       color: var(--text-secondary);
       margin-bottom: 4px;
     }
-    .dimension-header h2 {
+    .capability-header h2 {
       font-size: 20px;
       font-weight: 700;
       letter-spacing: -.01em;
@@ -201,6 +201,25 @@
       border: 1px solid rgba(26,144,96,.2);
       border-radius: 4px;
       padding: 2px 7px;
+    }
+
+    .capability-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      max-width: 640px;
+    }
+    .skill-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .skill-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-left: 9px;
     }
 
     /* ── Level rows ── */
@@ -309,7 +328,7 @@
 <body>
 
 <nav class="phase-nav">
-  <a class="phase-nav-brand" href="#">Founderito OS</a>
+  <a class="phase-nav-brand" href="founderito_os_dimensions.html">Founderito OS</a>
   <div class="phase-nav-links">
     <a class="phase-nav-link" href="founderito-understand.html">01 · Understand</a>
     <a class="phase-nav-link" href="founderito-envision.html">02 · Envision</a>
@@ -320,7 +339,7 @@
 <header>
   <div class="phase-label">Founderito OS &mdash; Phase 3 of 3</div>
   <h1>Deliver, Run + Learn</h1>
-  <p>Six dimensions that define how well a founder ships, operates, and closes feedback loops — orchestrating agents and people to improve continuously while maintaining the human quality gate.</p>
+  <p>Five capabilities that define how well a founder ships, operates, and closes feedback loops — orchestrating agents and people to improve continuously while maintaining the human quality gate.</p>
 </header>
 
 <div class="legend">
@@ -337,14 +356,24 @@
 <main>
 
   <!-- 1. Orchestration Fluency -->
-  <div class="dimension" id="orchestration-fluency">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 01</div>
+  <div class="capability" id="orchestration-fluency">
+    <div class="capability-header">
+      <div class="capability-number">Capability 01</div>
       <h2>Orchestration Fluency <span class="agent-tag">agent-native</span></h2>
+      <p class="capability-desc">Designing, directing and improving agent and human workflows so that delivery is reliable, repeatable, and continuously improving.</p>
       <div class="skills">
-        <span class="skill-tag">Workflow design</span>
-        <span class="skill-tag">AI tooling</span>
-        <span class="skill-tag">Process orchestration</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Workflow design</span>
+          <span class="skill-desc">Structuring end-to-end processes where agents and humans each have defined roles and handoff points.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">AI tooling</span>
+          <span class="skill-desc">Selecting, configuring, and maintaining the agent tools that power delivery workflows.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Process orchestration</span>
+          <span class="skill-desc">Coordinating multiple workflows and agents into a coherent delivery system.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -389,14 +418,24 @@
   </div>
 
   <!-- 2. Operational Clarity -->
-  <div class="dimension" id="operational-clarity">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 02</div>
+  <div class="capability" id="operational-clarity">
+    <div class="capability-header">
+      <div class="capability-number">Capability 02</div>
       <h2>Operational Clarity</h2>
+      <p class="capability-desc">Metrics, process and systems that give the team — and agents — visibility into what's working, what's not, and what to do about it.</p>
       <div class="skills">
-        <span class="skill-tag">Metrics design</span>
-        <span class="skill-tag">Process documentation</span>
-        <span class="skill-tag">OKR execution</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Metrics design</span>
+          <span class="skill-desc">Choosing leading indicators that drive real decisions, not vanity numbers.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Process documentation</span>
+          <span class="skill-desc">Writing processes clearly enough that agents and new team members can follow them without a walkthrough.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">OKR execution</span>
+          <span class="skill-desc">Setting goals that are reviewed and acted on, not just set and forgotten.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -439,66 +478,26 @@
     </div>
   </div>
 
-  <!-- 3. Team Activation -->
-  <div class="dimension" id="team-activation">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 03</div>
-      <h2>Team Activation</h2>
-      <div class="skills">
-        <span class="skill-tag">Hiring</span>
-        <span class="skill-tag">Performance management</span>
-        <span class="skill-tag">Culture building</span>
-      </div>
-    </div>
-    <div class="levels">
-      <div class="level-row l1">
-        <div class="level-label">
-          <span class="level-badge"><span class="level-pip"></span>L1</span>
-          <span class="level-name-text">Absent</span>
-        </div>
-        <div class="level-content">Hiring is reactive — roles are filled when pain becomes acute rather than against a deliberate plan. Performance is managed by feel. Culture is not actively shaped; it emerges by accident and compounds whatever was there from the start.</div>
-      </div>
-      <div class="level-row l2">
-        <div class="level-label">
-          <span class="level-badge"><span class="level-pip"></span>L2</span>
-          <span class="level-name-text">Emerging</span>
-        </div>
-        <div class="level-content">Has a hiring process and knows what good looks like for key roles. Gives feedback informally and occasionally. Culture is described but not actively built — values are stated but inconsistently embodied in decisions or how difficult conversations are handled.</div>
-      </div>
-      <div class="level-row l3 is-baseline">
-        <div class="level-label">
-          <span class="level-badge"><span class="level-pip"></span>L3</span>
-          <span class="level-name-text">Developing</span>
-          <span class="baseline-marker">Baseline</span>
-        </div>
-        <div class="level-content">Hires deliberately against a defined profile and can distinguish great from good for their team's specific context. Has a regular, honest performance conversation rhythm. Actively works to build culture — makes values explicit in decisions, celebrates the right behaviours, and addresses misalignment when it appears.</div>
-      </div>
-      <div class="level-row l4">
-        <div class="level-label">
-          <span class="level-badge"><span class="level-pip"></span>L4</span>
-          <span class="level-name-text">Strong</span>
-        </div>
-        <div class="level-content">Builds high-performing teams that can function and grow without constant involvement — the hiring bar, performance expectations, and team values operate as a self-reinforcing system. Can identify when someone isn't in the right role and act on it with directness and care. The team compounds: it attracts more people like its best members.</div>
-      </div>
-      <div class="level-row l5">
-        <div class="level-label">
-          <span class="level-badge"><span class="level-pip"></span>L5</span>
-          <span class="level-name-text">Exceptional</span>
-        </div>
-        <div class="level-content">Has built or shaped teams that become known as exceptional — that others model themselves after, write about, or try to hire from. Their approach to team building in a hybrid human-agent environment is studied. Has a track record of developing people who go on to build or lead well themselves.</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- 4. Learning Velocity -->
-  <div class="dimension" id="learning-velocity">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 04</div>
+  <!-- 3. Learning Velocity -->
+  <div class="capability" id="learning-velocity">
+    <div class="capability-header">
+      <div class="capability-number">Capability 03</div>
       <h2>Learning Velocity</h2>
+      <p class="capability-desc">Closing feedback loops fast — synthesising what agents, experiments, and customers reveal into decisions that improve the next iteration.</p>
       <div class="skills">
-        <span class="skill-tag">Experiment design</span>
-        <span class="skill-tag">Feedback loop design</span>
-        <span class="skill-tag">Data synthesis</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Experiment design</span>
+          <span class="skill-desc">Running structured tests with a hypothesis, success metric, and decision rule before you start.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Feedback loop design</span>
+          <span class="skill-desc">Building short, reliable cycles that surface signal from users, agents, and the market.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Data synthesis</span>
+          <span class="skill-desc">Combining quantitative and qualitative signals into actionable insight, not just dashboards.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -542,14 +541,24 @@
   </div>
 
   <!-- 5. Quality Stewardship -->
-  <div class="dimension" id="quality-stewardship">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 05</div>
+  <div class="capability" id="quality-stewardship">
+    <div class="capability-header">
+      <div class="capability-number">Capability 04</div>
       <h2>Quality Stewardship <span class="agent-tag">agent-native</span></h2>
+      <p class="capability-desc">The human taste gate — setting and maintaining the standard for what actually ships, especially when agents generate significant output.</p>
       <div class="skills">
-        <span class="skill-tag">Quality review</span>
-        <span class="skill-tag">Taste calibration</span>
-        <span class="skill-tag">Standards setting</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Quality review</span>
+          <span class="skill-desc">Evaluating output against an explicit standard consistently enough that others learn the bar.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Taste calibration</span>
+          <span class="skill-desc">Developing and sharing a clear sense of what 'good' looks like so the team can self-assess.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Standards setting</span>
+          <span class="skill-desc">Making quality criteria explicit, documented, and usable by both people and agents.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -594,14 +603,24 @@
   </div>
 
   <!-- 6. Founder State -->
-  <div class="dimension" id="founder-state">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 06</div>
+  <div class="capability" id="founder-state">
+    <div class="capability-header">
+      <div class="capability-number">Capability 05</div>
       <h2>Founder State</h2>
+      <p class="capability-desc">Energy management, composure and clarity under sustained pressure — the operating system underneath everything else.</p>
       <div class="skills">
-        <span class="skill-tag">Energy management</span>
-        <span class="skill-tag">Resilience building</span>
-        <span class="skill-tag">Focus practice</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Energy management</span>
+          <span class="skill-desc">Designing rhythms and routines that sustain high performance without chronic depletion.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Resilience building</span>
+          <span class="skill-desc">Developing the capacity to recover quickly from setbacks and sustained pressure periods.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Focus practice</span>
+          <span class="skill-desc">Maintaining clarity about what matters most when everything feels urgent.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -633,7 +652,7 @@
           <span class="level-badge"><span class="level-pip"></span>L4</span>
           <span class="level-name-text">Strong</span>
         </div>
-        <div class="level-content">Operates with high, consistent energy and equanimity — others notice it and the team draws stability from it. Working environment and rhythms are deliberately designed around sustainability. The quality of decisions under pressure remains high; reactivity is noticed and managed, not acted on.</div>
+        <div class="level-content">Operates with high, consistent energy and composure — others notice it and the team draws stability from it. Working environment and rhythms are deliberately designed around sustainability. The quality of decisions under pressure remains high; reactivity is noticed and managed, not acted on.</div>
       </div>
       <div class="level-row l5">
         <div class="level-label">
@@ -648,7 +667,7 @@
 </main>
 
 <footer>
-  Founderito OS &mdash; Deliver, Run + Learn &middot; 6 dimensions &middot; L1–L5
+  Founderito OS &mdash; Deliver, Run + Learn &middot; 5 capabilities &middot; L1–L5
 </footer>
 
 </body>

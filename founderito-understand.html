@@ -114,19 +114,19 @@
     }
 
     /* ── Dimension card ── */
-    .dimension {
+    .capability {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
     }
 
-    .dimension-header {
+    .capability-header {
       padding: 24px 28px 20px;
       border-bottom: 1px solid var(--border);
     }
 
-    .dimension-number {
+    .capability-number {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.08em;
@@ -135,7 +135,7 @@
       margin-bottom: 4px;
     }
 
-    .dimension-header h2 {
+    .capability-header h2 {
       font-size: 20px;
       font-weight: 700;
       letter-spacing: -0.01em;
@@ -155,6 +155,25 @@
       border: 1px solid var(--border);
       border-radius: 4px;
       padding: 2px 8px;
+    }
+
+    .capability-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      max-width: 640px;
+    }
+    .skill-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .skill-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-left: 9px;
     }
 
     /* ── Level rows ── */
@@ -353,7 +372,7 @@
 <body>
 
 <nav class="phase-nav">
-  <a class="phase-nav-brand" href="#">Founderito OS</a>
+  <a class="phase-nav-brand" href="founderito_os_dimensions.html">Founderito OS</a>
   <div class="phase-nav-links">
     <a class="phase-nav-link active" href="founderito-understand.html">01 · Understand</a>
     <a class="phase-nav-link" href="founderito-envision.html">02 · Envision</a>
@@ -364,7 +383,7 @@
 <header>
   <div class="phase-label">Founderito OS &mdash; Phase 1 of 3</div>
   <h1>Understand</h1>
-  <p>Five dimensions that define how well a founder understands their customers, market, and operating context. Each level describes what competence looks like in practice — concrete enough to self-assess honestly.</p>
+  <p>Five capabilities that define how well a founder understands their customers, market, and operating context. Each level describes what competence looks like in practice — concrete enough to self-assess honestly.</p>
 </header>
 
 <div class="legend">
@@ -381,14 +400,24 @@
 <main>
 
   <!-- 1. Customer Insight -->
-  <div class="dimension" id="customer-insight">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 01</div>
+  <div class="capability" id="customer-insight">
+    <div class="capability-header">
+      <div class="capability-number">Capability 01</div>
       <h2>Customer Insight</h2>
+      <p class="capability-desc">Deep insight into personas, pain points, jobs-to-be-done, and the full customer journey — from raw discovery through to pattern recognition.</p>
       <div class="skills">
-        <span class="skill-tag">Customer discovery</span>
-        <span class="skill-tag">Persona development</span>
-        <span class="skill-tag">Demand unfolding</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Customer discovery</span>
+          <span class="skill-desc">Structured conversations that surface what customers actually need, not just what they say they want.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Persona development</span>
+          <span class="skill-desc">Building evidence-based profiles that represent real segments, not demographic templates.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Demand discovery</span>
+          <span class="skill-desc">Uncovering not just what customers want, but what they will actually pay for — and how that demand evolves over time.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -432,14 +461,24 @@
   </div>
 
   <!-- 2. Strategic Landscape -->
-  <div class="dimension" id="strategic-landscape">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 02</div>
+  <div class="capability" id="strategic-landscape">
+    <div class="capability-header">
+      <div class="capability-number">Capability 02</div>
       <h2>Strategic Landscape</h2>
+      <p class="capability-desc">Situational awareness across macro trends, company strategy, and product strategy — understanding where you play, why, and what constraints shape that.</p>
       <div class="skills">
-        <span class="skill-tag">Strategic analysis</span>
-        <span class="skill-tag">Competitive positioning</span>
-        <span class="skill-tag">Macro analysis</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Strategic analysis</span>
+          <span class="skill-desc">Connecting company-level strategy to specific product decisions and trade-offs.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Competitive positioning</span>
+          <span class="skill-desc">Defining where you sit relative to alternatives and why that position is defensible.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Macro analysis</span>
+          <span class="skill-desc">Reading external shifts — regulatory, economic, technological — that reshape the playing field.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -483,14 +522,24 @@
   </div>
 
   <!-- 3. Domain Dynamics -->
-  <div class="dimension" id="domain-dynamics">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 03</div>
+  <div class="capability" id="domain-dynamics">
+    <div class="capability-header">
+      <div class="capability-number">Capability 03</div>
       <h2>Domain Dynamics</h2>
+      <p class="capability-desc">Understanding how competitors, feature sets, business models, positioning, and threat levels shift over time — actively maintained, not a one-time snapshot.</p>
       <div class="skills">
-        <span class="skill-tag">Competitive intelligence</span>
-        <span class="skill-tag">Market positioning</span>
-        <span class="skill-tag">Business model analysis</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Competitive intelligence</span>
+          <span class="skill-desc">Systematically tracking what competitors ship, hire for, and signal about their direction.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Market positioning</span>
+          <span class="skill-desc">Mapping how players are differentiated and where meaningful gaps exist.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Business model analysis</span>
+          <span class="skill-desc">Understanding what each competitor's commercial structure enables and constrains.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -535,14 +584,24 @@
   </div>
 
   <!-- 4. Emergent Trends -->
-  <div class="dimension" id="emergent-trends">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 04</div>
+  <div class="capability" id="emergent-trends">
+    <div class="capability-header">
+      <div class="capability-number">Capability 04</div>
       <h2>Emergent Trends</h2>
+      <p class="capability-desc">Tracking meaningful shifts in business, technology, and design before they become obvious — and knowing which ones actually matter to your context.</p>
       <div class="skills">
-        <span class="skill-tag">Foresight</span>
-        <span class="skill-tag">Technology scanning</span>
-        <span class="skill-tag">Design literacy</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Foresight</span>
+          <span class="skill-desc">Distinguishing meaningful signal from noise early enough to act on it.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Technology scanning</span>
+          <span class="skill-desc">Monitoring technical shifts that could change what's possible or economical to build.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Design literacy</span>
+          <span class="skill-desc">Reading changes in interaction paradigms, aesthetics, and user expectations across categories.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -587,14 +646,24 @@
   </div>
 
   <!-- 5. Context Architecture -->
-  <div class="dimension" id="context-architecture">
-    <div class="dimension-header">
-      <div class="dimension-number">Dimension 05</div>
+  <div class="capability" id="context-architecture">
+    <div class="capability-header">
+      <div class="capability-number">Capability 05</div>
       <h2>Context Architecture <span style="font-weight:400; color: var(--text-secondary); font-size:16px;">agent-native</span></h2>
+      <p class="capability-desc">Creating rich, structured context across all four Understand inputs so that agents can work reliably — not just prompting, but designing the information layer.</p>
       <div class="skills">
-        <span class="skill-tag">Brief writing</span>
-        <span class="skill-tag">Knowledge design</span>
-        <span class="skill-tag">Context structuring</span>
+        <div class="skill-detail">
+          <span class="skill-tag">Brief writing</span>
+          <span class="skill-desc">Crafting clear, specific briefs that give agents enough context to produce reliable output.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Knowledge design</span>
+          <span class="skill-desc">Organising what you know into reusable, structured formats agents and people can draw from.</span>
+        </div>
+        <div class="skill-detail">
+          <span class="skill-tag">Context structuring</span>
+          <span class="skill-desc">Designing the information architecture that connects discovery, strategy, and domain knowledge into a coherent layer.</span>
+        </div>
       </div>
     </div>
     <div class="levels">
@@ -641,7 +710,7 @@
 </main>
 
 <footer>
-  Founderito OS &mdash; Understand Phase &middot; 5 dimensions &middot; L1–L5
+  Founderito OS &mdash; Understand Phase &middot; 5 capabilities &middot; L1–L5
 </footer>
 
 </body>
