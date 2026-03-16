@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Founderito OS — Envision Phase</title>
+  <style>
+    :root {
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --border: #e8e5e0;
+      --text: #1a1916;
+      --text-secondary: #6b6860;
+
+      --phase: #6848B8;
+      --phase-light: #f3f0fb;
+
+      --l1: #d4d2ce;
+      --l2: #c8bce8;
+      --l3: #9b82d4;
+      --l4: #6848B8;
+      --l5: #3d2080;
+
+      --l1-bg: #f5f4f2;
+      --l2-bg: #f3f0fb;
+      --l3-bg: #ece7f7;
+      --l4-bg: #e2d8f2;
+      --l5-bg: #d5c9e8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Phase nav ── */
+    .phase-nav {
+      background: #000;
+      display: flex;
+      align-items: stretch;
+      height: 44px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .phase-nav-brand {
+      display: flex;
+      align-items: center;
+      padding: 0 20px 0 24px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      border-right: 1px solid rgba(255,255,255,.08);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .phase-nav-links {
+      display: flex;
+      align-items: stretch;
+    }
+    .phase-nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,.35);
+      border-right: 1px solid rgba(255,255,255,.08);
+      transition: color .12s;
+      white-space: nowrap;
+    }
+    .phase-nav-link:hover { color: rgba(255,255,255,.7); }
+    .phase-nav-link.active {
+      color: #fff;
+      border-bottom: 2px solid var(--phase);
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 48px 40px 32px;
+      border-bottom: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .phase-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--phase);
+      margin-bottom: 8px;
+    }
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 10px;
+    }
+    header p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      font-size: 14px;
+    }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 16px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+    }
+
+    /* ── Main ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ── Dimension card ── */
+    .dimension {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .dimension-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .dimension-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .dimension-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: 8px;
+    }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill-tag {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+    .agent-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--phase);
+      background: var(--phase-light);
+      border: 1px solid rgba(104,72,184,.2);
+      border-radius: 4px;
+      padding: 2px 7px;
+    }
+
+    /* ── Level rows ── */
+    .levels { display: flex; flex-direction: column; }
+    .level-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .level-row:last-child { border-bottom: none; }
+
+    .level-label {
+      padding: 18px 20px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-right: 1px solid var(--border);
+    }
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .level-pip {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .level-name-text {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+    .level-content {
+      padding: 18px 24px;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .level-content em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    /* level tints */
+    .level-row.l1 .level-label { background: var(--l1-bg); }
+    .level-row.l2 .level-label { background: var(--l2-bg); }
+    .level-row.l3 .level-label { background: var(--l3-bg); }
+    .level-row.l4 .level-label { background: var(--l4-bg); }
+    .level-row.l5 .level-label { background: var(--l5-bg); }
+
+    .level-row.l1 .level-pip { background: var(--l1); }
+    .level-row.l2 .level-pip { background: var(--l2); }
+    .level-row.l3 .level-pip { background: var(--l3); }
+    .level-row.l4 .level-pip { background: var(--l4); }
+    .level-row.l5 .level-pip { background: var(--l5); }
+
+    /* baseline/target markers */
+    .level-row.is-baseline .level-label { border-right: 2px solid var(--l3); }
+    .level-row.is-target   .level-label { border-right: 2px solid var(--l4); }
+    .level-row.is-baseline .level-content,
+    .level-row.is-target   .level-content { background: #f9fcfa; }
+
+    .baseline-marker {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #4a9d7a;
+      background: #e6f2ec;
+      border: 1px solid #7eb8a4;
+      border-radius: 3px;
+      padding: 2px 6px;
+      line-height: 1.4;
+    }
+    .baseline-marker.target {
+      color: #1f5c3a;
+      background: #d5eadf;
+      border-color: #4a9d7a;
+    }
+
+    /* ── Footer ── */
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px 40px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 640px) {
+      header, .legend, main, footer { padding-left: 20px; padding-right: 20px; }
+      .level-row { grid-template-columns: 110px 1fr; }
+      .level-label { padding: 14px 12px 14px 16px; }
+      .level-content { padding: 14px 16px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="phase-nav">
+  <a class="phase-nav-brand" href="#">Founderito OS</a>
+  <div class="phase-nav-links">
+    <a class="phase-nav-link" href="founderito-understand.html">01 · Understand</a>
+    <a class="phase-nav-link active" href="founderito-envision.html">02 · Envision</a>
+    <a class="phase-nav-link" href="founderito-deliver.html">03 · Deliver</a>
+  </div>
+</nav>
+
+<header>
+  <div class="phase-label">Founderito OS &mdash; Phase 2 of 3</div>
+  <h1>Envision</h1>
+  <p>Five dimensions that define how well a founder can synthesise what they know into a clear direction — the opportunity, the vision, the model, the plan, and how humans and agents share the work.</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l1)"></span> L1 Absent</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l2)"></span> L2 Emerging</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l3)"></span> L3 Developing</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l4)"></span> L4 Strong</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l5)"></span> L5 Exceptional</div>
+  <div class="legend-divider"></div>
+  <div class="legend-item"><span class="baseline-marker" style="margin-top:0;">Baseline</span> Minimum operating level</div>
+  <div class="legend-item"><span class="baseline-marker target" style="margin-top:0;">Target</span> Recommended operating level</div>
+</div>
+
+<main>
+
+  <!-- 1. Opportunity -->
+  <div class="dimension" id="opportunity">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 01</div>
+      <h2>Opportunity</h2>
+      <div class="skills">
+        <span class="skill-tag">Insight synthesis</span>
+        <span class="skill-tag">Opportunity framing</span>
+        <span class="skill-tag">Problem definition</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">Has a product idea but no synthesis of why this problem is worth solving over others — discovery inputs exist as separate notes without a clear takeaway. The problem being solved shifts depending on who last asked about it.</div>
+      </div>
+      <div class="level-row l2">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+        </div>
+        <div class="level-content">Can describe the problem and point to some evidence, but the opportunity framing is broad enough to mean several different things. Multiple problems compete for attention without a clear conviction about which one is the real prize.</div>
+      </div>
+      <div class="level-row l3 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Has synthesised discovery into a clear problem statement with supporting evidence — the gap, who it affects most, and why now. The framing is reasonably stable but can shift under sustained questioning or when significant new information arrives.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">Holds a sharp, evidence-backed conviction about the specific opportunity — precise enough that a new team member could understand the strategic bet within minutes. The framing is stable under pressure and creates immediate alignment when shared.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Frames opportunities in ways that redefine how others see a market or problem space. Has a track record of identifying and articulating opportunities that proved correct before they were widely recognised — the framing itself becomes a reference point others respond to.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. North Star Experience -->
+  <div class="dimension" id="north-star-experience">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 02</div>
+      <h2>North Star Experience</h2>
+      <div class="skills">
+        <span class="skill-tag">Vision crafting</span>
+        <span class="skill-tag">Experience design</span>
+        <span class="skill-tag">Narrative design</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">The product vision is defined by a feature list or functional spec with no picture of what the future experience actually feels like for the customer. Different team members are building toward different mental models of success.</div>
+      </div>
+      <div class="level-row l2">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+        </div>
+        <div class="level-content">Can describe a desired future state in general terms — <em>"seamless," "powerful," "delightful"</em> — but the vision isn't specific enough to make design decisions obvious or align a team without verbal interpretation each time.</div>
+      </div>
+      <div class="level-row l3 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Has a concrete picture of the target experience — specific moments, emotions, and interactions that define success. The vision guides major decisions but isn't yet communicated compellingly enough to operate without the founder's active involvement in key calls.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">The north star experience is vivid, specific, and stable — expressed in multiple formats (narrative, prototype, reference examples) and shared clearly enough that others make the right calls without constant input. Trade-offs become obvious when evaluated against it.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Creates visions that redefine what "good" looks like in a category — their articulation of the target experience becomes the benchmark others respond to or build against. Has a track record of visions that proved directionally right and sustained the work required to reach them.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Business Model -->
+  <div class="dimension" id="business-model">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 03</div>
+      <h2>Business Model</h2>
+      <div class="skills">
+        <span class="skill-tag">Business model design</span>
+        <span class="skill-tag">Value proposition</span>
+        <span class="skill-tag">Revenue modelling</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">Business model is an assumption — <em>"we'll charge a subscription"</em> — without modelling what drives unit economics or how value is actually captured. Revenue thinking hasn't been examined under any real scrutiny.</div>
+      </div>
+      <div class="level-row l2">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+        </div>
+        <div class="level-content">Can articulate how the business makes money and name the value proposition. Has done some revenue modelling but key assumptions — conversion rates, retention, willingness to pay — are largely guesses rather than evidence-based estimates.</div>
+      </div>
+      <div class="level-row l3 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Has a coherent, reasoned business model with explicit assumptions and a basic model of unit economics. Has validated at least some key assumptions through real customer conversations or early transactions. Can explain what needs to be true for the model to work — and what would break it.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">Maintains a live model of the business — pricing, value prop, unit economics — grounded in real data and updated as the business evolves. Can identify which assumptions are load-bearing, knows which haven't been tested yet, and is actively designing experiments to stress-test them.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Has designed or pioneered business models that changed the economics of a category — or demonstrated rare ability to find non-obvious commercial structures in new spaces. Their business model thinking is studied or publicly referenced by others in the field.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Delivery Plan -->
+  <div class="dimension" id="delivery-plan">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 04</div>
+      <h2>Delivery Plan</h2>
+      <div class="skills">
+        <span class="skill-tag">Prioritisation</span>
+        <span class="skill-tag">Roadmapping</span>
+        <span class="skill-tag">Resource planning</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">The roadmap is a wishlist with no clear prioritisation logic — features are added as ideas arrive and nothing is ever removed. Resource allocation is reactive, shaped by whoever last raised a concern rather than by strategic logic.</div>
+      </div>
+      <div class="level-row l2">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+        </div>
+        <div class="level-content">Has a sequenced plan that distinguishes near-term from longer-term, but prioritisation criteria aren't explicit or consistently applied. The plan is aspirational — it doesn't fully account for available resources or realistic timelines.</div>
+      </div>
+      <div class="level-row l3 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Maintains a roadmap with explicit prioritisation logic tied to the opportunity and north star. Can explain what comes first and why, and has resource-balanced the near-term plan against realistic capacity. The plan adapts when new information arrives but doesn't change shape with every conversation.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">The delivery plan is a live strategic document — sequenced, resource-constrained, and explicitly connected to the business model and north star. Trade-offs are named, not hidden. Any stakeholder can understand what's being bet on and why the sequence is right.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Has developed delivery planning approaches others adopt — for managing radical uncertainty, for coordinating human and agent work at speed, or for maintaining strategic coherence while moving fast. Their sequencing or prioritisation frameworks are referenced as models by others.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Operating Model -->
+  <div class="dimension" id="operating-model">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 05</div>
+      <h2>Operating Model <span class="agent-tag">agent-native</span></h2>
+      <div class="skills">
+        <span class="skill-tag">AI workflow design</span>
+        <span class="skill-tag">Delegation design</span>
+        <span class="skill-tag">Human-AI teaming</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">Work is allocated based on habit — humans do what they've always done, agents (if used) receive ad hoc tasks with no deliberate design. No thinking has happened about which work genuinely requires human judgment and which can be delegated.</div>
+      </div>
+      <div class="level-row l2 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Aware that agents can take on more work and has started experimenting with delegation. But the division of work has not been systematically designed — it has evolved through trial and error with no explicit principles about what stays human.</div>
+      </div>
+      <div class="level-row l3 is-target">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker target">Target</span>
+        </div>
+        <div class="level-content">Has made explicit decisions about how humans and agents divide the work of building — which tasks require human taste, judgment, or accountability, and which can be fully or partially delegated. These decisions are documented, even if the model is still evolving.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">Maintains a coherent operating model — clear about which work requires human judgment, which benefits from human-agent collaboration, and which can run autonomously. The model is reviewed and updated as agent capabilities improve; workflow design is a strategic activity, not an afterthought.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Has developed original frameworks for human-AI work design that others adopt. Can design an operating model for a new team or domain quickly and precisely — their approach to delegation and human-agent teaming is referenced as a model for agent-native product organisations.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Founderito OS &mdash; Envision Phase &middot; 5 dimensions &middot; L1–L5
+</footer>
+
+</body>
+</html>

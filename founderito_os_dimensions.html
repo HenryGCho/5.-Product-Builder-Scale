@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founderito · Operating System Dimensions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #ECF2F6;
+  color: #040810;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  padding: 0 0 100px;
+}
+
+/* ── TOKENS ── */
+:root {
+  --void:    #ECF2F6;
+  --panel:   #FFFFFF;
+  --panel-2: #DDE8EE;
+  --panel-3: #CCDAE3;
+  --band:    #B0C4CF;
+  --white:   #040810;
+  --mid:     #2C4A60;
+  --text:    #4E6E82;
+  --muted:   #849DB0;
+  --border:  rgba(0,136,168,.18);
+  --border-2: rgba(0,136,168,.10);
+
+  --c-understand: #1880C0;
+  --c-envision:   #6848B8;
+  --c-deliver:    #1A9060;
+
+  --radius: 2px;
+  --radius-lg: 6px;
+  --page-max: 1280px;
+  --page-pad: 40px;
+}
+
+/* ── HEADER ── */
+.page-header {
+  background: #000000;
+  padding: 0 var(--page-pad);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0,136,168,.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.page-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #EDF4F8;
+}
+.header-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,.15);
+}
+.header-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+.header-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: #0088A8;
+  border: 1px solid rgba(0,136,168,.35);
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+
+/* ── INTRO ── */
+.intro {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 56px var(--page-pad) 40px;
+}
+.intro-step {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.intro-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+.intro-heading .accent { color: #0088A8; }
+.intro-body {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.75;
+  max-width: 640px;
+}
+.intro-body strong { color: var(--mid); font-weight: 500; }
+
+.agent-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 11px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid #0088A8;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.55;
+}
+.agent-note strong { color: var(--white); font-weight: 600; }
+.agent-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  background: #0088A8;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+
+/* ── OS ARC ── */
+.os-arc {
+  max-width: var(--page-max);
+  margin: 0 auto 56px;
+  padding: 0 var(--page-pad);
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.arc-step {
+  flex: 1;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 14px 22px;
+  position: relative;
+}
+.arc-step:nth-child(1) { background: var(--c-understand); }
+.arc-step:nth-child(2) { background: var(--c-envision); padding-left: 32px; }
+.arc-step:nth-child(3) { background: var(--c-deliver); flex: 1.4; padding-left: 32px; }
+.arc-step::after {
+  content: '';
+  position: absolute;
+  right: -15px; top: 0;
+  width: 0; height: 0;
+  border-top: var(--chevron-half, 40px) solid transparent;
+  border-bottom: var(--chevron-half, 40px) solid transparent;
+  z-index: 2;
+}
+.arc-step:nth-child(1)::after { border-left: 15px solid var(--c-understand); }
+.arc-step:nth-child(2)::after { border-left: 15px solid var(--c-envision); }
+.arc-step:nth-child(3)::after { display: none; }
+.arc-step-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  line-height: 1;
+  margin-bottom: 7px;
+}
+.arc-step-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,.75);
+  line-height: 1.55;
+  max-width: 260px;
+}
+.arc-step:nth-child(3) .arc-step-desc { max-width: 320px; }
+
+/* ── PHASE SECTION ── */
+.phase-section {
+  max-width: var(--page-max);
+  margin: 0 auto 48px;
+  padding: 0 var(--page-pad);
+}
+
+.phase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px 17px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.phase-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.phase-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: #FFFFFF;
+  padding: 4px 9px;
+  background: rgba(0,0,0,.22);
+  text-transform: uppercase;
+}
+.phase-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  line-height: 1;
+}
+.phase-shift {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,.7);
+  line-height: 1.5;
+  max-width: 340px;
+  text-align: right;
+}
+.phase-shift strong {
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.phase-body {
+  background: var(--panel);
+  border: 1px solid var(--border-2);
+  border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  display: flex;
+  align-items: stretch;
+  min-height: 460px;
+}
+
+/* ── RADAR COLUMN ── */
+.phase-radar-col {
+  width: 460px;
+  flex-shrink: 0;
+  padding: 36px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--void);
+  border-left: 1px solid var(--border-2);
+  order: 2;
+}
+.phase-radar-col canvas { display: block; }
+
+/* ── DIMENSION LIST COLUMN ── */
+.phase-dims-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  order: 1;
+}
+.dim-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 28px;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+  position: relative;
+  transition: background .12s;
+}
+.dim-row:last-child { border-bottom: none; }
+.dim-row.agent-native {
+  background: rgba(0,136,168,.04);
+}
+.dim-row.agent-native::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+}
+.dim-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 0;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.dim-info { flex: 1; min-width: 0; }
+.dim-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: -.01em;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.dim-name .tag-agent {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  color: #0088A8;
+  border: 1px solid rgba(0,136,168,.30);
+  background: rgba(0,136,168,.06);
+  white-space: nowrap;
+}
+.dim-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.6;
+}
+/* ── LEVEL INDICATOR ── */
+.dim-level {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex-shrink: 0;
+  padding-top: 3px;
+  position: relative;
+  cursor: default;
+  text-decoration: none;
+  color: inherit;
+}
+a.dim-level { cursor: pointer; }
+.level-pips {
+  display: flex;
+  gap: 4px;
+}
+.pip {
+  width: 9px;
+  height: 9px;
+  border-radius: 0;
+  background: rgba(0,0,0,.10);
+}
+.pip.filled {
+  /* background color set inline per phase */
+}
+.level-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+.level-tooltip {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 9px 12px;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 4px 14px rgba(4,8,16,.12);
+  z-index: 20;
+  min-width: 140px;
+}
+.dim-level:hover .level-tooltip {
+  display: flex;
+}
+.tooltip-level {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--mid);
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.tooltip-baseline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  color: #4a9d7a;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  padding-top: 3px;
+  border-top: 1px solid var(--border-2);
+}
+
+/* ── SKILLS COLUMN ── */
+.dims-col-headers {
+  display: flex;
+  align-items: center;
+  padding: 9px 28px;
+  background: var(--void);
+  border-bottom: 1px solid var(--border-2);
+  gap: 14px;
+}
+.col-header-dim {
+  flex: 1;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.col-header-skills {
+  width: 220px;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-left: 20px;
+  border-left: 1px solid var(--border-2);
+}
+.dim-skills {
+  width: 220px;
+  flex-shrink: 0;
+  padding-left: 20px;
+  border-left: 1px solid var(--border-2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 2px;
+}
+.skill-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--mid);
+  background: var(--void);
+  border: 1px solid var(--border-2);
+  padding: 3px 9px;
+  display: inline-block;
+  width: fit-content;
+  line-height: 1.4;
+  letter-spacing: .01em;
+}
+
+/* ── LEGEND ── */
+.legend {
+  max-width: var(--page-max);
+  margin: 8px auto 0;
+  padding: 0 var(--page-pad);
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: .06em;
+}
+
+/* ── INSIGHT BAR ── */
+.insight-bar {
+  max-width: var(--page-max);
+  margin: 32px auto 0;
+  padding: 0 var(--page-pad);
+}
+.insight-inner {
+  border: 1px solid var(--border-2);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border-2);
+}
+.insight-cell {
+  background: var(--panel);
+  padding: 20px 24px;
+  border-top: 3px solid transparent;
+}
+.insight-cell:nth-child(1) { border-top-color: var(--c-understand); }
+.insight-cell:nth-child(2) { border-top-color: var(--c-envision); }
+.insight-cell:nth-child(3) { border-top-color: var(--c-deliver); }
+.insight-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.insight-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.65;
+}
+.insight-text strong { color: var(--white); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="page-header">
+  <div class="page-header-left">
+    <span class="header-logo">Founderito</span>
+    <div class="header-divider"></div>
+    <span class="header-title">Operating System · Dimensional Framework</span>
+  </div>
+  <span class="header-badge">Agent-Native v1</span>
+</div>
+
+<!-- ── INTRO ── -->
+<div class="intro">
+  <div class="intro-step">Framework · 3 phases · 16 dimensions</div>
+  <h1 class="intro-heading">The <span class="accent">Product OS</span><br>Dimension Map</h1>
+  <p class="intro-body">
+    The operating system maps <strong>16 capability dimensions</strong> across 3 phases. As agents increasingly do or support delivery, the human layer concentrates around judgment, framing, and taste — not execution.
+  </p>
+  <div class="agent-note">
+    <span class="agent-marker">A</span>
+    Dimensions marked <strong>agent-native</strong> are new or significantly changed in the context of agent-powered delivery — these are the emerging edges of founder capability.
+  </div>
+</div>
+
+<!-- ── OS ARC ── -->
+<div class="os-arc">
+  <div class="arc-step">
+    <div class="arc-step-label">01 · Understand</div>
+    <div class="arc-step-desc">Get genuinely close to the customer, the market, and the problem before building anything.</div>
+  </div>
+  <div class="arc-step">
+    <div class="arc-step-label">02 · Envision</div>
+    <div class="arc-step-desc">Define what to build, why it matters, and how agents and humans each play a role.</div>
+  </div>
+  <div class="arc-step">
+    <div class="arc-step-label">03 · Deliver, Run &amp; Learn</div>
+    <div class="arc-step-desc">Ship, operate, and close feedback loops — orchestrating agents and people to improve continuously.</div>
+  </div>
+</div>
+
+<!-- ── PHASES ── -->
+<div id="phases-container"></div>
+
+<!-- ── LEGEND ── -->
+<div class="legend">
+  <div class="legend-item">
+    <div style="width:20px;height:2px;background:#1880C0;"></div>
+    Understand
+  </div>
+  <div class="legend-item">
+    <div style="width:20px;height:2px;background:#6848B8;"></div>
+    Envision
+  </div>
+  <div class="legend-item">
+    <div style="width:20px;height:2px;background:#1A9060;"></div>
+    Deliver, Run &amp; Learn
+  </div>
+  <div class="legend-item" style="margin-left: auto;">
+    <div style="width:20px;height:2px;background:rgba(0,136,168,.25);border-top:1px dashed #0088A8;"></div>
+    Agent-native dimension
+  </div>
+</div>
+
+<!-- ── INSIGHT ── -->
+<div class="insight-bar">
+  <div class="insight-inner">
+    <div class="insight-cell">
+      <div class="insight-label">Key shift · Understand</div>
+      <div class="insight-text">The depth of your Understand work sets the ceiling for everything else. <strong>Agents amplify what they're given</strong> — so shallow understanding doesn't just slow you down, it compounds across every output.</div>
+    </div>
+    <div class="insight-cell">
+      <div class="insight-label">Key shift · Envision</div>
+      <div class="insight-text">Agents work directly from your direction. <strong>A clear, specific vision produces clear, specific output</strong> at speed. Fuzzy direction produces fuzzy results — faster.</div>
+    </div>
+    <div class="insight-cell">
+      <div class="insight-label">Key shift · Deliver</div>
+      <div class="insight-text">As agents handle more execution, the founder's role becomes directing rather than doing. <strong>The primary differentiator becomes human judgment</strong> — the final call on what's actually good enough to ship.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const phases = [
+  {
+    id: 'understand',
+    number: '01',
+    name: 'Understand',
+    color: '#1880C0',
+    colorRgb: '24,128,192',
+    shift: 'The depth of your understanding sets the ceiling for everything that follows. <strong>Agents amplify whatever context they\'re given</strong> — shallow inputs produce shallow outputs.',
+    dims: [
+      { name: 'Customer Insight',     desc: 'Deep insight into personas, pain points, jobs-to-be-done, and the full customer journey — from raw discovery through to pattern recognition',                             level: 4, baseline: 3, target: null, link: 'customer-insight',    agent: false, skills: ['Customer discovery', 'Persona development', 'Demand unfolding'] },
+      { name: 'Strategic Landscape',  desc: 'Situational awareness across macro trends, company strategy, and product strategy — understanding where you play, why, and what constraints shape that',                  level: 3, baseline: 2, target: null, link: 'strategic-landscape', agent: false, skills: ['Strategic analysis', 'Competitive positioning', 'Macro analysis'] },
+      { name: 'Domain Dynamics',      desc: 'Understanding how competitors, feature sets, business models, positioning, and threat levels shift over time — actively maintained, not a one-time snapshot',             level: 3, baseline: 2, target: 3,    link: 'domain-dynamics',    agent: false, skills: ['Competitive intelligence', 'Market positioning', 'Business model analysis'] },
+      { name: 'Emergent Trends',      desc: 'Tracking meaningful shifts in business, technology, and design before they become obvious — and knowing which ones actually matter to your context',                       level: 2, baseline: 2, target: 4,    link: 'emergent-trends',    agent: false, skills: ['Foresight', 'Technology scanning', 'Design literacy'] },
+      { name: 'Context Architecture', desc: 'Creating rich, structured context across all four Understand inputs so that agents can work reliably — not just prompting, but designing the information layer',           level: 2, baseline: 3, target: 4,    link: 'context-architecture', agent: true,  skills: ['Brief writing', 'Knowledge design', 'Context structuring'] },
+    ]
+  },
+  {
+    id: 'envision',
+    number: '02',
+    name: 'Envision',
+    color: '#6848B8',
+    colorRgb: '104,72,184',
+    shift: 'Clear decisions here unlock speed everywhere else. <strong>Agents execute on your conviction</strong> — not your uncertainty.',
+    dims: [
+      { name: 'Opportunity',          desc: 'Synthesising what you have learned into a clear conviction about where the real opportunity sits — the gap, the problem worth solving, and why now',                          level: 3, agent: false, skills: ['Insight synthesis', 'Opportunity framing', 'Problem definition'] },
+      { name: 'North Star Experience',desc: 'Defining and communicating the future state compellingly — the product experience, the design ambition, and the innovative leap that makes it worth building',               level: 4, agent: false, skills: ['Vision crafting', 'Experience design', 'Narrative design'] },
+      { name: 'Business Model',       desc: 'The commercial logic that makes the opportunity viable — how value is created, delivered, and captured in a way that sustains and scales',                                    level: 3, agent: false, skills: ['Business model design', 'Value proposition', 'Revenue modelling'] },
+      { name: 'Delivery Plan',        desc: 'The sequencing, prioritisation and resourcing of how you get from here to the north star — ruthless about what comes first and why',                                         level: 3, agent: false, skills: ['Prioritisation', 'Roadmapping', 'Resource planning'] },
+      { name: 'Operating Model',      desc: 'Strategic decisions about how humans and agents divide the work of envisioning and building — what requires human judgment and what can be delegated',                        level: 2, agent: true,  skills: ['AI workflow design', 'Delegation design', 'Human-AI teaming'] },
+    ]
+  },
+  {
+    id: 'deliver',
+    number: '03',
+    name: 'Deliver, Run + Learn',
+    color: '#1A9060',
+    colorRgb: '26,144,96',
+    shift: 'The founder\'s role shifts from doing the work to directing it — <strong>setting the quality bar</strong> and making sure what ships is actually good.',
+    dims: [
+      { name: 'Orchestration Fluency', desc: 'Designing, directing and improving agent + human workflows',                                           level: 2, agent: true,  skills: ['Workflow design', 'AI tooling', 'Process orchestration'] },
+      { name: 'Operational Clarity',   desc: 'Metrics, process and systems that give the team — and agents — visibility',                           level: 3, agent: false, skills: ['Metrics design', 'Process documentation', 'OKR execution'] },
+      { name: 'Team Activation',       desc: 'Hiring, developing and energising people in a hybrid human-agent team',                               level: 4, agent: false, skills: ['Hiring', 'Performance management', 'Culture building'] },
+      { name: 'Learning Velocity',     desc: 'Closing feedback loops fast; synthesising what agents and experiments reveal',                         level: 3, agent: false, skills: ['Experiment design', 'Feedback loop design', 'Data synthesis'] },
+      { name: 'Quality Stewardship',   desc: 'The human taste gate — final judgment on what actually ships',                                        level: 3, agent: true,  skills: ['Quality review', 'Taste calibration', 'Standards setting'] },
+      { name: 'Founder State',         desc: 'Energy management, equanimity and clarity under sustained pressure',                                  level: 4, agent: false, skills: ['Energy management', 'Resilience building', 'Focus practice'] },
+    ]
+  }
+];
+
+// ── LABEL ABBREVIATIONS ──────────────────────────────────────────────────
+const abbrevs = [
+  ['Customer Insight','Strategic Landscape','Domain Dynamics','Emergent Trends','Context Architecture'],
+  ['Opportunity','North Star Experience','Business Model','Delivery Plan','Operating Model'],
+  ['Orchestration Fluency','Operational Clarity','Team Activation','Learning Velocity','Quality Stewardship','Founder State']
+];
+
+// ── LEVEL RUBRIC ───────────────────────────────────────────────────────────
+const levelNames = ['', 'Absent', 'Emerging', 'Developing', 'Strong', 'Exceptional'];
+const understandUrl = 'file:///Users/henry.cho/Documents/12.%20Claude%20Code/founderito-understand.html';
+
+// ── BUILD DOM ──────────────────────────────────────────────────────────────
+const container = document.getElementById('phases-container');
+
+phases.forEach((phase, phaseIdx) => {
+  // Section wrapper
+  const section = document.createElement('div');
+  section.className = 'phase-section';
+  section.id = phase.id;
+
+  // Header band
+  const header = document.createElement('div');
+  header.className = 'phase-header';
+  header.style.background = phase.color;
+  header.innerHTML = `
+    <div class="phase-header-left">
+      <span class="phase-number">${phase.number}</span>
+      <span class="phase-name">${phase.name}</span>
+    </div>
+    <div class="phase-shift">${phase.shift}</div>
+  `;
+  section.appendChild(header);
+
+  // Body: radar + dims
+  const body = document.createElement('div');
+  body.className = 'phase-body';
+
+  // Radar column
+  const radarCol = document.createElement('div');
+  radarCol.className = 'phase-radar-col';
+  const canvas = document.createElement('canvas');
+  radarCol.appendChild(canvas);
+  body.appendChild(radarCol);
+
+  // Dims column
+  const dimsCol = document.createElement('div');
+  dimsCol.className = 'phase-dims-col';
+
+  // Column headers
+  const colHeaders = document.createElement('div');
+  colHeaders.className = 'dims-col-headers';
+  colHeaders.innerHTML = `
+    <span class="col-header-dim">Dimension</span>
+    <span class="col-header-skills">Skills Needed</span>
+  `;
+  dimsCol.appendChild(colHeaders);
+
+  phase.dims.forEach(dim => {
+    const row = document.createElement('div');
+    row.className = 'dim-row' + (dim.agent ? ' agent-native' : '');
+    if (dim.agent) row.style.borderLeft = `3px solid ${phase.color}`;
+
+    const pips = [1,2,3,4,5].map(n => {
+      const filled = n <= (dim.baseline || dim.level);
+      const cls = 'pip' + (filled ? ' filled' : '');
+      const style = filled ? `background:${phase.color}` : '';
+      return `<div class="${cls}" style="${style}"></div>`;
+    }).join('');
+
+    const skillTags = (dim.skills || []).map(s =>
+      `<span class="skill-tag">${s}</span>`
+    ).join('');
+
+    const tooltipBaseline = dim.baseline
+      ? `<span class="tooltip-baseline">Baseline · L${dim.baseline} ${levelNames[dim.baseline]}</span>` : '';
+
+    const levelTag  = dim.link ? 'a' : 'div';
+    const levelHref = dim.link ? ` href="${understandUrl}#${dim.link}" target="_blank"` : '';
+
+    row.innerHTML = `
+      <div class="dim-dot" style="background:${dim.agent ? phase.color : 'rgba(0,136,168,.4)'}"></div>
+      <div class="dim-info">
+        <div class="dim-name">
+          ${dim.name}
+          ${dim.agent ? `<span class="tag-agent">agent-native</span>` : ''}
+        </div>
+        <div class="dim-desc">${dim.desc}</div>
+      </div>
+      <${levelTag} class="dim-level"${levelHref}>
+        <div class="level-pips">${pips}</div>
+        <div class="level-label">L${dim.level} / 5</div>
+        <div class="level-tooltip">
+          <span class="tooltip-level">L${dim.level} · ${levelNames[dim.level]}</span>
+          ${tooltipBaseline}
+        </div>
+      </${levelTag}>
+      <div class="dim-skills">${skillTags}</div>
+    `;
+    dimsCol.appendChild(row);
+  });
+  body.appendChild(dimsCol);
+  section.appendChild(body);
+  container.appendChild(section);
+
+  // Draw radar
+  requestAnimationFrame(() => drawRadar(canvas, phase.dims, phase.color, phase.colorRgb, abbrevs[phaseIdx]));
+});
+
+// ── CHEVRON SIZING ────────────────────────────────────────────────────────
+function fixChevrons() {
+  document.querySelectorAll('.arc-step').forEach((step, i) => {
+    if (i < 2) {
+      step.style.setProperty('--chevron-half', (step.offsetHeight / 2) + 'px');
+    }
+  });
+}
+window.addEventListener('load', fixChevrons);
+window.addEventListener('resize', fixChevrons);
+
+// ── RADAR RENDERER ────────────────────────────────────────────────────────
+function drawRadar(canvas, dims, color, colorRgb, labelArr) {
+  const dpr  = window.devicePixelRatio || 1;
+  const SIZE = 460;
+  canvas.width  = SIZE * dpr;
+  canvas.height = SIZE * dpr;
+  canvas.style.width  = SIZE + 'px';
+  canvas.style.height = SIZE + 'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const cx = SIZE / 2, cy = SIZE / 2;
+  const maxR = 152;
+  const N = dims.length;
+
+  function angleFor(i) { return -Math.PI / 2 + (2 * Math.PI / N) * i; }
+  function pt(r, i) {
+    const a = angleFor(i);
+    return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+  }
+
+  // Ring backgrounds — one per level (L1–L5)
+  [1, 2, 3, 4, 5].forEach(lvl => {
+    const frac = lvl / 5;
+    ctx.beginPath();
+    for (let i = 0; i < N; i++) {
+      const p = pt(maxR * frac, i);
+      i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = lvl === 3 ? 'rgba(0,136,168,.28)' : 'rgba(0,136,168,.13)';
+    ctx.lineWidth   = lvl === 3 ? 1.2 : 0.8;
+    ctx.stroke();
+
+    // Level label along the top axis (i=0, straight up)
+    const labelY = cy - maxR * frac;
+    ctx.font = '500 8px "JetBrains Mono", monospace';
+    ctx.fillStyle = lvl === 3 ? 'rgba(0,136,168,.7)' : 'rgba(132,157,176,.65)';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(`L${lvl}`, cx + 4, labelY);
+  });
+
+  // Axis lines
+  for (let i = 0; i < N; i++) {
+    const p = pt(maxR, i);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(p.x, p.y);
+    ctx.strokeStyle = 'rgba(0,136,168,.14)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+  }
+
+  // Agent-native dashed axes
+  dims.forEach((dim, i) => {
+    if (dim.agent) {
+      const p = pt(maxR, i);
+      ctx.beginPath();
+      ctx.setLineDash([4, 4]);
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(p.x, p.y);
+      ctx.strokeStyle = color + 'AA';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  });
+
+  // Data fill
+  ctx.beginPath();
+  dims.forEach((d, i) => {
+    const p = pt(maxR * (d.level / 5), i);
+    i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+  });
+  ctx.closePath();
+  ctx.fillStyle   = `rgba(${colorRgb},.13)`;
+  ctx.strokeStyle = color;
+  ctx.lineWidth   = 2;
+  ctx.fill();
+  ctx.stroke();
+
+  // Data points
+  dims.forEach((d, i) => {
+    const p = pt(maxR * (d.level / 5), i);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, d.agent ? 6 : 4, 0, Math.PI * 2);
+    if (d.agent) {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fill();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    } else {
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+  });
+
+  // Axis labels
+  const labelR = maxR + 22;
+  dims.forEach((dim, i) => {
+    const a  = angleFor(i);
+    const lx = cx + labelR * Math.cos(a);
+    const ly = cy + labelR * Math.sin(a);
+    const lbl = labelArr[i];
+
+    ctx.font = `${dim.agent ? '700' : '500'} 12px "Inter", sans-serif`;
+    ctx.fillStyle = dim.agent ? color : 'rgba(46,74,96,.85)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline =
+      Math.abs(Math.sin(a)) < 0.12 ? 'middle' :
+      Math.sin(a) > 0 ? 'top' : 'bottom';
+
+    if (lbl.includes(' ') && lbl.length > 10) {
+      // wrap long labels across two lines
+      const words = lbl.split(' ');
+      const mid = Math.ceil(words.length / 2);
+      const line1 = words.slice(0, mid).join(' ');
+      const line2 = words.slice(mid).join(' ');
+      const lineH = 14;
+      const origBaseline = ctx.textBaseline;
+      ctx.textBaseline = 'middle';
+      ctx.fillText(line1, lx, ly - lineH / 2);
+      ctx.fillText(line2, lx, ly + lineH / 2);
+    } else {
+      ctx.fillText(lbl, lx, ly);
+    }
+  });
+}
+</script>
+</body>
+</html>

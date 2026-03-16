@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Founderito OS — Understand Phase</title>
+  <style>
+    :root {
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --border: #e8e5e0;
+      --text: #1a1916;
+      --text-secondary: #6b6860;
+      --accent: #2d2d2d;
+
+      --l1: #d4d2ce;
+      --l2: #a8c4e0;
+      --l3: #7eb8a4;
+      --l4: #4a9d7a;
+      --l5: #2d6a4f;
+
+      --l1-bg: #f5f4f2;
+      --l2-bg: #eef4fa;
+      --l3-bg: #edf5f1;
+      --l4-bg: #e6f2ec;
+      --l5-bg: #ddeee6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 48px 40px 32px;
+      border-bottom: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .phase-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      font-size: 14px;
+    }
+
+    /* ── Level legend ── */
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 16px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legend-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ── Dimension card ── */
+    .dimension {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .dimension-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dimension-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .dimension-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+
+    /* ── Level rows ── */
+    .levels {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .level-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .level-row:last-child {
+      border-bottom: none;
+    }
+
+    .level-label {
+      padding: 18px 20px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-right: 1px solid var(--border);
+    }
+
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .level-pip {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .level-name {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .level-content {
+      padding: 18px 24px;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* level background tints */
+    .level-row.l1 .level-label { background: var(--l1-bg); }
+    .level-row.l2 .level-label { background: var(--l2-bg); }
+    .level-row.l3 .level-label { background: var(--l3-bg); }
+    .level-row.l4 .level-label { background: var(--l4-bg); }
+    .level-row.l5 .level-label { background: var(--l5-bg); }
+
+    /* pip colours */
+    .level-row.l1 .level-pip { background: var(--l1); }
+    .level-row.l2 .level-pip { background: var(--l2); }
+    .level-row.l3 .level-pip { background: var(--l3); }
+    .level-row.l4 .level-pip { background: var(--l4); }
+    .level-row.l5 .level-pip { background: var(--l5); }
+
+    /* italics for real-world anchors */
+    .level-content em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    /* ── Baseline markers ── */
+    .level-row.is-baseline {
+      position: relative;
+    }
+
+    .level-row.is-baseline .level-label {
+      border-right: 2px solid var(--l3);
+    }
+
+    .level-row.is-baseline .level-content {
+      border-left: none;
+    }
+
+    .level-row.is-target .level-label {
+      border-right: 2px solid var(--l4);
+    }
+
+    .baseline-marker {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--l4);
+      background: #e6f2ec;
+      border: 1px solid var(--l3);
+      border-radius: 3px;
+      padding: 2px 6px;
+      line-height: 1.4;
+    }
+
+    .baseline-marker.target {
+      color: #1f5c3a;
+      background: #d5eadf;
+      border-color: var(--l4);
+    }
+
+    .level-row.is-baseline .level-content,
+    .level-row.is-target .level-content {
+      background: #f7fcf9;
+    }
+
+    /* ── Footer ── */
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px 40px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ── Phase nav ── */
+    .phase-nav {
+      background: #000;
+      display: flex;
+      align-items: stretch;
+      height: 44px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .phase-nav-brand {
+      display: flex;
+      align-items: center;
+      padding: 0 20px 0 24px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      border-right: 1px solid rgba(255,255,255,.08);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .phase-nav-links { display: flex; align-items: stretch; }
+    .phase-nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,.35);
+      border-right: 1px solid rgba(255,255,255,.08);
+      transition: color .12s;
+      white-space: nowrap;
+    }
+    .phase-nav-link:hover { color: rgba(255,255,255,.7); }
+    .phase-nav-link.active {
+      color: #fff;
+      border-bottom: 2px solid #1880C0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      header, .legend, main, footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .level-row {
+        grid-template-columns: 110px 1fr;
+      }
+
+      .level-label {
+        padding: 14px 12px 14px 16px;
+      }
+
+      .level-content {
+        padding: 14px 16px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="phase-nav">
+  <a class="phase-nav-brand" href="#">Founderito OS</a>
+  <div class="phase-nav-links">
+    <a class="phase-nav-link active" href="founderito-understand.html">01 · Understand</a>
+    <a class="phase-nav-link" href="founderito-envision.html">02 · Envision</a>
+    <a class="phase-nav-link" href="founderito-deliver.html">03 · Deliver</a>
+  </div>
+</nav>
+
+<header>
+  <div class="phase-label">Founderito OS &mdash; Phase 1 of 3</div>
+  <h1>Understand</h1>
+  <p>Five dimensions that define how well a founder understands their customers, market, and operating context. Each level describes what competence looks like in practice — concrete enough to self-assess honestly.</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l1)"></span> L1 Absent</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l2)"></span> L2 Emerging</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l3)"></span> L3 Developing</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l4)"></span> L4 Strong</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l5)"></span> L5 Exceptional</div>
+  <div class="legend-divider"></div>
+  <div class="legend-item"><span class="baseline-marker" style="margin-top:0; position:static;">Baseline</span> Minimum operating level</div>
+  <div class="legend-item"><span class="baseline-marker target" style="margin-top:0; position:static;">Target</span> Recommended operating level</div>
+</div>
+
+<main>
+
+  <!-- 1. Customer Insight -->
+  <div class="dimension" id="customer-insight">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 01</div>
+      <h2>Customer Insight</h2>
+      <div class="skills">
+        <span class="skill-tag">Customer discovery</span>
+        <span class="skill-tag">Persona development</span>
+        <span class="skill-tag">Demand unfolding</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name">Absent</span>
+        </div>
+        <div class="level-content">Pain points are assumed or described in product terms — <em>"users need a faster export"</em> rather than <em>"users are losing clients because reports arrive too late."</em> Has not done structured discovery; personas are demographic templates invented in a workshop or copied from a brief.</div>
+      </div>
+      <div class="level-row l2">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name">Emerging</span>
+        </div>
+        <div class="level-content">Has spoken to some customers but interviews tend to confirm existing beliefs rather than challenge them. Can describe who the customer is but struggles to articulate what they're actually trying to accomplish — and why current solutions, including yours, fall short.</div>
+      </div>
+      <div class="level-row l3 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name">Developing</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Runs recurring interviews with a loose framework and can articulate what customers are trying to accomplish beyond the surface request — <em>"close books faster,"</em> not <em>"better UI."</em> Personas exist and are referenced in planning, but a competitor launch or a pricing conversation can still bypass them entirely.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name">Strong</span>
+        </div>
+        <div class="level-content">Maintains a record of customer evidence — updated after every significant discovery session — that connects pain points to underlying goals to demand signals. When a competitor ships a feature, you already know from your interviews whether it matters to your segment; customer insight shapes what gets built, what gets cut, and how you position.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name">Exceptional</span>
+        </div>
+        <div class="level-content">Has developed discovery methods others in the domain adopt — published, taught, or publicly referenced. Can surface demand that customers themselves can't articulate, has made product bets based on that, and the bets held up; their process, not just their instincts, is what others seek to replicate.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Strategic Landscape -->
+  <div class="dimension" id="strategic-landscape">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 02</div>
+      <h2>Strategic Landscape</h2>
+      <div class="skills">
+        <span class="skill-tag">Strategic analysis</span>
+        <span class="skill-tag">Competitive positioning</span>
+        <span class="skill-tag">Macro analysis</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name">Absent</span>
+        </div>
+        <div class="level-content">Strategy is reactive and internal-facing — decisions are driven by what's buildable or what a customer asked for last week. Cannot explain the company's strategic bets in one sentence or connect a product decision back to them.</div>
+      </div>
+      <div class="level-row l2 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name">Emerging</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Can describe the company strategy at a high level but can't reliably connect it to specific product choices. Reads macro analysis when it surfaces — <em>the Sequoia macro deck, an a16z essay</em> — but it rarely changes what's being built.</div>
+      </div>
+      <div class="level-row l3">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name">Developing</span>
+        </div>
+        <div class="level-content">Conducts periodic strategic reviews and can articulate how macro shifts — rising AI infrastructure costs, a new regulatory regime, a platform consolidation — are affecting the market. Competitive positioning is defined but reviewed infrequently; a gap remains between strategic awareness and what gets prioritised week to week.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name">Strong</span>
+        </div>
+        <div class="level-content">Maintains a coherent strategic picture that links macro conditions → market position → product bets, and can explain each link explicitly. Can articulate not just <em>what</em> is being built but <em>why now</em> — what external window makes this the right moment — and can name what has been deliberately not built, and why.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name">Exceptional</span>
+        </div>
+        <div class="level-content">Has published or publicly articulated a view of where the market is heading that others cite and build strategies around. Has a track record of framing competitive dynamics in ways that proved right — and that changed how others in the sector thought about the landscape.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Domain Dynamics -->
+  <div class="dimension" id="domain-dynamics">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 03</div>
+      <h2>Domain Dynamics</h2>
+      <div class="skills">
+        <span class="skill-tag">Competitive intelligence</span>
+        <span class="skill-tag">Market positioning</span>
+        <span class="skill-tag">Business model analysis</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name">Absent</span>
+        </div>
+        <div class="level-content">Competitor knowledge is limited to landing pages and pricing pages; business model comparisons are ad hoc or absent. Significant competitive moves are discovered on social media or from customers — not from any systematic monitoring.</div>
+      </div>
+      <div class="level-row l2 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name">Emerging</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Tracks key competitors' main features and pricing and is building a more systematic view, though coverage is patchy. Business model differences are recognised — <em>"they're usage-based, we're seat-based"</em> — but not yet analysed for what they imply about each company's constraints.</div>
+      </div>
+      <div class="level-row l3 is-target">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name">Developing</span>
+          <span class="baseline-marker target">Target</span>
+        </div>
+        <div class="level-content">Tracks a defined competitive set using a consistent framework — feature matrices, positioning maps, a competitor log — and updates it when moves happen. Responds to competitive shifts with a reasoned view but is still primarily reactive: the news arrives, then the analysis follows.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name">Strong</span>
+        </div>
+        <div class="level-content">Maintains a current view of competitive dynamics that includes not just what competitors are shipping but what they're likely to ship next, based on their hiring patterns, pricing changes, and customer complaints. Can model what a competitor's business model constrains them from doing, and uses this to identify whitespace and sharpen differentiation.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name">Exceptional</span>
+        </div>
+        <div class="level-content">Reads competitive dynamics at a structural level — tracking effects others miss, such as recognising that a competitor's dependence on a key platform partner would prevent them from moving upmarket before they announced it, or that a feature trend was reshaping category-wide customer expectations. Their analysis frameworks or published views are referenced by others as setting the standard.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Emergent Trends -->
+  <div class="dimension" id="emergent-trends">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 04</div>
+      <h2>Emergent Trends</h2>
+      <div class="skills">
+        <span class="skill-tag">Foresight</span>
+        <span class="skill-tag">Technology scanning</span>
+        <span class="skill-tag">Design literacy</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name">Absent</span>
+        </div>
+        <div class="level-content">Trend awareness is limited to mainstream tech news encountered by chance; shifts in technology, design paradigms, and business models are noticed only after wide adoption — well past the point of strategic relevance. Has no practice of actively scanning signals outside immediate work.</div>
+      </div>
+      <div class="level-row l2 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name">Emerging</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Follows a small set of sources and is building awareness of signals outside their immediate category. Can name trends that feel relevant but struggles to separate meaningful signal from noise, or to connect emerging shifts — <em>a new interaction paradigm, a change in how infrastructure is priced</em> — to concrete implications for their product.</div>
+      </div>
+      <div class="level-row l3">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name">Developing</span>
+        </div>
+        <div class="level-content">Maintains a defined list of 10–15 sources reviewed on a schedule — newsletters, research communities, practitioners — and keeps a running log where signals are noted and updated. Can connect some trends to product opportunities with reasonable confidence across technology, design, and business model shifts, but the pattern recognition isn't yet reliable enough to act on consistently.</div>
+      </div>
+      <div class="level-row l4 is-target">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name">Strong</span>
+          <span class="baseline-marker target">Target</span>
+        </div>
+        <div class="level-content">Translates signals across technology, design paradigm shifts, and business model change into concrete scenarios or near-term bets — and has a track record of being early. Has made a product or technology decision 12–18 months before the shift became obvious, and the reasoning held up; foresight actively informs what gets explored, built, or deprioritised.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name">Exceptional</span>
+        </div>
+        <div class="level-content">Recognised by peers as an early signal detector in their domain — their written or spoken trend framings circulate and others build strategies around them. Produces original synthesis across technology, design, and business model change that isn't easily replicated; not just consuming signals but generating frameworks others use to interpret them.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Context Architecture -->
+  <div class="dimension" id="context-architecture">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 05</div>
+      <h2>Context Architecture <span style="font-weight:400; color: var(--text-secondary); font-size:16px;">agent-native</span></h2>
+      <div class="skills">
+        <span class="skill-tag">Brief writing</span>
+        <span class="skill-tag">Knowledge design</span>
+        <span class="skill-tag">Context structuring</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name">Absent</span>
+        </div>
+        <div class="level-content">Relies on ad hoc prompting with minimal context; agents regularly produce output that requires substantial rewriting — and the problem is attributed to the model rather than the brief. Every session starts from scratch with no shared information layer.</div>
+      </div>
+      <div class="level-row l2">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name">Emerging</span>
+        </div>
+        <div class="level-content">Aware that agents need structured context and has started writing more detailed briefs; output quality improves with effort but context lives in long chat threads or one-off documents rather than anything reusable. Each session still requires significant setup before useful work can happen.</div>
+      </div>
+      <div class="level-row l3 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name">Developing</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Has built reusable context blocks — product background, personas, constraints — that can be combined for different tasks rather than rewritten each time. Agents execute well-defined tasks reliably, but novel or ambiguous tasks still produce inconsistent output because the knowledge layer has gaps and is maintained ad hoc.</div>
+      </div>
+      <div class="level-row l4 is-target">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name">Strong</span>
+          <span class="baseline-marker target">Target</span>
+        </div>
+        <div class="level-content">Maintains a structured, regularly updated knowledge layer — product context, personas, principles, domain knowledge — that agents draw from reliably across varied tasks. Briefs are designed so that when context is incomplete, the agent surfaces the gap rather than filling it with a plausible-sounding assumption; a new team member or agent could be onboarded using the written context alone, without a verbal walkthrough.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name">Exceptional</span>
+        </div>
+        <div class="level-content">Has developed original frameworks for structuring agent context that others study and adopt — published, taught, or referenced as a model. Can design an information architecture for a new domain from first principles with speed and precision; their approach is what others use as a starting point when they don't know how to begin.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Founderito OS &mdash; Understand Phase &middot; 5 dimensions &middot; L1–L5
+</footer>
+
+</body>
+</html>

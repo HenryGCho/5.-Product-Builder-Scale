@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Founderito OS — Deliver, Run + Learn</title>
+  <style>
+    :root {
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --border: #e8e5e0;
+      --text: #1a1916;
+      --text-secondary: #6b6860;
+
+      --phase: #1A9060;
+      --phase-light: #edf6f1;
+
+      --l1: #d4d2ce;
+      --l2: #a8d4be;
+      --l3: #5dab80;
+      --l4: #1A9060;
+      --l5: #0f5c3a;
+
+      --l1-bg: #f5f4f2;
+      --l2-bg: #edf6f1;
+      --l3-bg: #e3f2ea;
+      --l4-bg: #d6ecdf;
+      --l5-bg: #c8e4d4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Phase nav ── */
+    .phase-nav {
+      background: #000;
+      display: flex;
+      align-items: stretch;
+      height: 44px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .phase-nav-brand {
+      display: flex;
+      align-items: center;
+      padding: 0 20px 0 24px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      border-right: 1px solid rgba(255,255,255,.08);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .phase-nav-links {
+      display: flex;
+      align-items: stretch;
+    }
+    .phase-nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,.35);
+      border-right: 1px solid rgba(255,255,255,.08);
+      transition: color .12s;
+      white-space: nowrap;
+    }
+    .phase-nav-link:hover { color: rgba(255,255,255,.7); }
+    .phase-nav-link.active {
+      color: #fff;
+      border-bottom: 2px solid var(--phase);
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 48px 40px 32px;
+      border-bottom: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .phase-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--phase);
+      margin-bottom: 8px;
+    }
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 10px;
+    }
+    header p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      font-size: 14px;
+    }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 16px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+    }
+
+    /* ── Main ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ── Dimension card ── */
+    .dimension {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .dimension-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .dimension-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .dimension-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: 8px;
+    }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill-tag {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+    .agent-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--phase);
+      background: var(--phase-light);
+      border: 1px solid rgba(26,144,96,.2);
+      border-radius: 4px;
+      padding: 2px 7px;
+    }
+
+    /* ── Level rows ── */
+    .levels { display: flex; flex-direction: column; }
+    .level-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .level-row:last-child { border-bottom: none; }
+
+    .level-label {
+      padding: 18px 20px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-right: 1px solid var(--border);
+    }
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .level-pip {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .level-name-text {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+    .level-content {
+      padding: 18px 24px;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .level-content em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    /* level tints */
+    .level-row.l1 .level-label { background: var(--l1-bg); }
+    .level-row.l2 .level-label { background: var(--l2-bg); }
+    .level-row.l3 .level-label { background: var(--l3-bg); }
+    .level-row.l4 .level-label { background: var(--l4-bg); }
+    .level-row.l5 .level-label { background: var(--l5-bg); }
+
+    .level-row.l1 .level-pip { background: var(--l1); }
+    .level-row.l2 .level-pip { background: var(--l2); }
+    .level-row.l3 .level-pip { background: var(--l3); }
+    .level-row.l4 .level-pip { background: var(--l4); }
+    .level-row.l5 .level-pip { background: var(--l5); }
+
+    /* baseline/target markers */
+    .level-row.is-baseline .level-label { border-right: 2px solid #7eb8a4; }
+    .level-row.is-target   .level-label { border-right: 2px solid #4a9d7a; }
+    .level-row.is-baseline .level-content,
+    .level-row.is-target   .level-content { background: #f9fcfa; }
+
+    .baseline-marker {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #4a9d7a;
+      background: #e6f2ec;
+      border: 1px solid #7eb8a4;
+      border-radius: 3px;
+      padding: 2px 6px;
+      line-height: 1.4;
+    }
+    .baseline-marker.target {
+      color: #1f5c3a;
+      background: #d5eadf;
+      border-color: #4a9d7a;
+    }
+
+    /* ── Footer ── */
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px 40px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 640px) {
+      header, .legend, main, footer { padding-left: 20px; padding-right: 20px; }
+      .level-row { grid-template-columns: 110px 1fr; }
+      .level-label { padding: 14px 12px 14px 16px; }
+      .level-content { padding: 14px 16px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="phase-nav">
+  <a class="phase-nav-brand" href="#">Founderito OS</a>
+  <div class="phase-nav-links">
+    <a class="phase-nav-link" href="founderito-understand.html">01 · Understand</a>
+    <a class="phase-nav-link" href="founderito-envision.html">02 · Envision</a>
+    <a class="phase-nav-link active" href="founderito-deliver.html">03 · Deliver</a>
+  </div>
+</nav>
+
+<header>
+  <div class="phase-label">Founderito OS &mdash; Phase 3 of 3</div>
+  <h1>Deliver, Run + Learn</h1>
+  <p>Six dimensions that define how well a founder ships, operates, and closes feedback loops — orchestrating agents and people to improve continuously while maintaining the human quality gate.</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l1)"></span> L1 Absent</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l2)"></span> L2 Emerging</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l3)"></span> L3 Developing</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l4)"></span> L4 Strong</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--l5)"></span> L5 Exceptional</div>
+  <div class="legend-divider"></div>
+  <div class="legend-item"><span class="baseline-marker" style="margin-top:0;">Baseline</span> Minimum operating level</div>
+  <div class="legend-item"><span class="baseline-marker target" style="margin-top:0;">Target</span> Recommended operating level</div>
+</div>
+
+<main>
+
+  <!-- 1. Orchestration Fluency -->
+  <div class="dimension" id="orchestration-fluency">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 01</div>
+      <h2>Orchestration Fluency <span class="agent-tag">agent-native</span></h2>
+      <div class="skills">
+        <span class="skill-tag">Workflow design</span>
+        <span class="skill-tag">AI tooling</span>
+        <span class="skill-tag">Process orchestration</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">Uses AI tools individually and ad hoc — each task is a one-off prompt with no connection to a broader workflow. No repeatable process exists where agents participate as consistent, designed-in contributors to delivery.</div>
+      </div>
+      <div class="level-row l2 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Has linked some agent tasks into sequences but workflows are fragile — they break when inputs change or context is missing. Tool selection is opportunistic rather than deliberate. Workflows are designed for convenience, not reliability or scalability.</div>
+      </div>
+      <div class="level-row l3 is-target">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker target">Target</span>
+        </div>
+        <div class="level-content">Has designed repeatable agent workflows for the team's most common tasks — with defined inputs, expected outputs, and human checkpoints. Can identify where a workflow is failing and diagnose the root cause. Uses a consistent, maintained toolset rather than constantly switching.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">Designs and maintains a suite of agent workflows that reliably accelerate delivery — each with clear scope, error handling, and human-in-the-loop decision points. Others on the team can run and adapt them without intervention; continuous improvement happens on a regular cadence.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Has developed workflow architectures or orchestration patterns that others study and replicate. Can design a reliable human-agent delivery system for a new domain from first principles; their approach to orchestration is referenced as a model for agent-native product teams.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Operational Clarity -->
+  <div class="dimension" id="operational-clarity">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 02</div>
+      <h2>Operational Clarity</h2>
+      <div class="skills">
+        <span class="skill-tag">Metrics design</span>
+        <span class="skill-tag">Process documentation</span>
+        <span class="skill-tag">OKR execution</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">The team operates without shared visibility into progress, quality, or health. Metrics, if tracked at all, are output counts rather than leading indicators. Knowledge lives in people's heads — no documented processes exist that agents or new hires could work from.</div>
+      </div>
+      <div class="level-row l2">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+        </div>
+        <div class="level-content">Has identified key metrics and communicates progress through regular updates. Processes exist but documentation is patchy and out of date. The team knows broadly what it's doing, but visibility breaks down under pressure or when context needs to transfer to a new person or agent.</div>
+      </div>
+      <div class="level-row l3 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Maintains a stable set of meaningful metrics that the team uses to make real decisions. Core processes are documented well enough for agents and new team members to execute without constant guidance. OKRs or equivalent goals are set, reviewed, and used to prioritise work — not just set and forgotten.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">The team and agents operate with consistent, shared visibility — metrics are meaningful and acted on, documented processes are maintained and current, and goal progress is reviewed regularly enough to influence decisions. Operational clarity is a deliberate investment; when things slip, the cause is diagnosed rather than worked around.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Has developed operations frameworks, metric systems, or documentation approaches others adopt. Their approach to operational clarity — designed explicitly for a human-agent team — is referenced as a model for scaling product organisations without losing coherence.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Team Activation -->
+  <div class="dimension" id="team-activation">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 03</div>
+      <h2>Team Activation</h2>
+      <div class="skills">
+        <span class="skill-tag">Hiring</span>
+        <span class="skill-tag">Performance management</span>
+        <span class="skill-tag">Culture building</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">Hiring is reactive — roles are filled when pain becomes acute rather than against a deliberate plan. Performance is managed by feel. Culture is not actively shaped; it emerges by accident and compounds whatever was there from the start.</div>
+      </div>
+      <div class="level-row l2">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+        </div>
+        <div class="level-content">Has a hiring process and knows what good looks like for key roles. Gives feedback informally and occasionally. Culture is described but not actively built — values are stated but inconsistently embodied in decisions or how difficult conversations are handled.</div>
+      </div>
+      <div class="level-row l3 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Hires deliberately against a defined profile and can distinguish great from good for their team's specific context. Has a regular, honest performance conversation rhythm. Actively works to build culture — makes values explicit in decisions, celebrates the right behaviours, and addresses misalignment when it appears.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">Builds high-performing teams that can function and grow without constant involvement — the hiring bar, performance expectations, and team values operate as a self-reinforcing system. Can identify when someone isn't in the right role and act on it with directness and care. The team compounds: it attracts more people like its best members.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Has built or shaped teams that become known as exceptional — that others model themselves after, write about, or try to hire from. Their approach to team building in a hybrid human-agent environment is studied. Has a track record of developing people who go on to build or lead well themselves.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Learning Velocity -->
+  <div class="dimension" id="learning-velocity">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 04</div>
+      <h2>Learning Velocity</h2>
+      <div class="skills">
+        <span class="skill-tag">Experiment design</span>
+        <span class="skill-tag">Feedback loop design</span>
+        <span class="skill-tag">Data synthesis</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">Learning is accidental — insights come from visible failures or customer complaints, not designed experiments. Feedback loops are long, informal, and unreliable. Agent output is used or discarded, but not treated as a signal worth analysing.</div>
+      </div>
+      <div class="level-row l2">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+        </div>
+        <div class="level-content">Runs occasional experiments and collects user feedback, but the process is inconsistent and insights don't reliably change what's being built. Feedback loops exist but are slow, manually maintained, and often deprioritised when delivery pressure builds.</div>
+      </div>
+      <div class="level-row l3 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Designs and runs deliberate experiments — hypothesis, success metric, timeframe, and decision rule — and has a cadence for synthesising what's been learned back into the roadmap. Feedback loops are maintained and include signal from both users and agent output quality.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">Operates with continuously running experiments and short, partly-automated feedback loops that influence the next sprint. Failures stay small because the team learns before they compound. Agent outputs are treated as hypothesis-generating — quality issues are diagnosed and fed back into briefs and workflows, not just corrected.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Has developed experiment or feedback loop designs others adopt. Their approach to learning velocity — synthesising signals from users, agents, and the market simultaneously and acting on them faster than competitors — is referenced as a model for high-performing product teams.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Quality Stewardship -->
+  <div class="dimension" id="quality-stewardship">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 05</div>
+      <h2>Quality Stewardship <span class="agent-tag">agent-native</span></h2>
+      <div class="skills">
+        <span class="skill-tag">Quality review</span>
+        <span class="skill-tag">Taste calibration</span>
+        <span class="skill-tag">Standards setting</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">Quality is assessed against whether something works, not whether it's good. No explicit standards exist — what ships is shaped by whoever reviewed it last and how much time was available. Agent outputs are accepted or rejected without a clear rubric.</div>
+      </div>
+      <div class="level-row l2 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Has a sense of what "good" looks like for their product but hasn't made it explicit. Quality reviews happen but are subjective and inconsistent — others on the team and agents can't reliably predict what will clear the bar or why something was rejected.</div>
+      </div>
+      <div class="level-row l3 is-target">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker target">Target</span>
+        </div>
+        <div class="level-content">Has articulated an explicit quality standard for what the product ships — specific enough that others can apply it and agents can be briefed against it. Reviews happen on a defined cadence. Can distinguish <em>"good enough to ship"</em> from <em>"not yet"</em> with consistent reasoning that others can learn from.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">Maintains a living quality rubric that evolves as the product's standard rises. Agents are briefed against it and their outputs reviewed against it systematically. The team has internalised the standard — the founder's taste is no longer the only quality gate. What ships is reliably at or above bar without requiring personal review of everything.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Has developed taste calibration frameworks or quality standards that define excellence for a category. Their approach to quality stewardship in an agent-native environment — where significant output is generated rather than authored — is studied by others. The work they ship is described by peers as setting the bar.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Founder State -->
+  <div class="dimension" id="founder-state">
+    <div class="dimension-header">
+      <div class="dimension-number">Dimension 06</div>
+      <h2>Founder State</h2>
+      <div class="skills">
+        <span class="skill-tag">Energy management</span>
+        <span class="skill-tag">Resilience building</span>
+        <span class="skill-tag">Focus practice</span>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level-row l1">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L1</span>
+          <span class="level-name-text">Absent</span>
+        </div>
+        <div class="level-content">Operating in a state of chronic overload — reactive, depleted, and making decisions under sustained cognitive stress. Recovery and energy management are not treated as operational concerns; they're viewed as luxuries the role doesn't allow.</div>
+      </div>
+      <div class="level-row l2 is-baseline">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L2</span>
+          <span class="level-name-text">Emerging</span>
+          <span class="baseline-marker">Baseline</span>
+        </div>
+        <div class="level-content">Aware that energy and state affect performance, and has started developing practices — exercise, sleep, boundaries — but they're inconsistent and the first thing abandoned under pressure. Can recognise depletion after the fact but struggles to act on warning signs in time.</div>
+      </div>
+      <div class="level-row l3 is-target">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L3</span>
+          <span class="level-name-text">Developing</span>
+          <span class="baseline-marker target">Target</span>
+        </div>
+        <div class="level-content">Has consistent practices that maintain energy and focus under normal operating conditions. Can identify warning signs of depletion and has recovery strategies that work. Pressure periods don't derail performance for extended periods — recovery happens within days, not weeks.</div>
+      </div>
+      <div class="level-row l4">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L4</span>
+          <span class="level-name-text">Strong</span>
+        </div>
+        <div class="level-content">Operates with high, consistent energy and equanimity — others notice it and the team draws stability from it. Working environment and rhythms are deliberately designed around sustainability. The quality of decisions under pressure remains high; reactivity is noticed and managed, not acted on.</div>
+      </div>
+      <div class="level-row l5">
+        <div class="level-label">
+          <span class="level-badge"><span class="level-pip"></span>L5</span>
+          <span class="level-name-text">Exceptional</span>
+        </div>
+        <div class="level-content">Has developed an exceptional, studied relationship with their own state — and shares what they've learned in ways others adopt. Their approach to founder performance and wellbeing under sustained pressure is referenced by others in the field. Can return to high-quality judgment reliably, even through extended periods of difficulty.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Founderito OS &mdash; Deliver, Run + Learn &middot; 6 dimensions &middot; L1–L5
+</footer>
+
+</body>
+</html>
